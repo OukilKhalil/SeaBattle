@@ -14,8 +14,8 @@ public class Cuirasses extends Navire{
     public Cuirasses() {
     }
 
-    public Cuirasses(int coordonneeX, int coordonneeY, int partie_touchee, String type, String position) {
-        super(coordonneeX, coordonneeY, 3, type, position);
+    public Cuirasses(int coordonneeX, int coordonneeY, String position) {
+        super(coordonneeX, coordonneeY, 3, "Cuirasses", position);
     }
     
     

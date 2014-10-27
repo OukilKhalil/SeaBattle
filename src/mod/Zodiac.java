@@ -14,8 +14,8 @@ public class Zodiac extends Navire{
     public Zodiac() {
     }
 
-    public Zodiac(int coordonneeX, int coordonneeY, int partie_touchee, String type, String position) {
-        super(coordonneeX, coordonneeY, 2, type, position);
+    public Zodiac(int coordonneeX, int coordonneeY, String position) {
+        super(coordonneeX, coordonneeY, 2, "Zodiac", position);
     }
     
     

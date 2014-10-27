@@ -14,8 +14,8 @@ public class SousMarin extends Navire{
     public SousMarin() {
     }
 
-    public SousMarin(int coordonneeX, int coordonneeY, int partie_touchee, String type, String position) {
-        super(coordonneeX, coordonneeY, 4, type, position);
+    public SousMarin(int coordonneeX, int coordonneeY, String position) {
+        super(coordonneeX, coordonneeY, 4, "Sous-Marin", position);
     }
     
 }

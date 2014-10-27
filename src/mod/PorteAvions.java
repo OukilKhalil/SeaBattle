@@ -14,8 +14,8 @@ public class PorteAvions extends Navire{
     public PorteAvions() {
     }
 
-    public PorteAvions(int coordonneeX, int coordonneeY, int partie_touchee, String type, String position) {
-        super(coordonneeX, coordonneeY, 5, type, position);
+    public PorteAvions(int coordonneeX, int coordonneeY, String position) {
+        super(coordonneeX, coordonneeY, 5, "Porte-Avions", position);
     }
     
     
