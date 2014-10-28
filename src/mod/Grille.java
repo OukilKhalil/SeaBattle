@@ -5,8 +5,6 @@
  */
 package mod;
 
-import java.util.Scanner;
-
 /**
  *
  * @author badr
@@ -14,6 +12,14 @@ import java.util.Scanner;
 public class Grille {
     
     private static Case_Grille grille[][] = new Case_Grille[10][10];
+
+    public Grille() {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                grille[i][j] = new Case_Grille();
+            }
+        }
+    }
     
     public static void intialisation(){
         Navire nav[] = new Navire[5];
@@ -23,11 +29,7 @@ public class Grille {
         nav[3] = cuirasses("V",1,4);
         nav[4] = zodiac();
         
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                grille[i][j] = new Case_Grille();
-            }
-        }
+        
         
         for (int i = 0; i < 5; i++) {
             int  x = nav[i].getCoordonneeX()-1;

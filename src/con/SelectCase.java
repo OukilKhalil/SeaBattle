@@ -3,12 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mod;
+package con;
+
+import vue.SeaBattle;
 
 /**
  *
  * @author ueve
  */
-public class Joueur {
+public class SelectCase {
     
+    public static void selectioner(int x, int n){
+        for (int i = x; i < x+n; i++) {
+            SeaBattle.selectCase(i);
+        }
+        
+    }
 }

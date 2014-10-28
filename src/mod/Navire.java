@@ -18,15 +18,7 @@ public abstract class Navire {
     protected String type;
     protected String position;
     
-    public Navire() {
-        this.coordonneeX = 0;
-        this.coordonneeY = 0;
-        this.taille = 0;
-        this.partie_touchee = 0;
-        this.type = "INCONNU";
-        this.position = "INCONNU";
-    }
-
+    
     public Navire(int coordonneeX, int coordonneeY, int taille, String type, String position) {
         this.coordonneeX = coordonneeX;
         this.coordonneeY = coordonneeY;
