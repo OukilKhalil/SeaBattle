@@ -5,7 +5,6 @@
  */
 package vue;
 
-import con.SelectCase;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,11 +13,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import mod.Cuirasses;
 import mod.Navire;
+import mod.Partie;
 import mod.PorteAvions;
 import mod.SousMarin;
 import mod.Zodiac;
@@ -29,7 +28,10 @@ import mod.Zodiac;
  */
 public class SeaBattle extends Application {
     
-    private static Button buttons [] = new Button[100];
+    
+    private Partie partie;
+    private GrilleVue grille;
+    private InitialisationVue initialisationVue;
     private Navire navEnCours;
     
     @Override
@@ -45,26 +47,20 @@ public class SeaBattle extends Application {
             }
         });*/
         
-        GridPane grid = new GridPane();
-        intialisationBtn();
         
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                String x = Integer.toString(i) + Integer.toString(j);
-                grid.add(buttons[Integer.parseInt(x)], i, j);
-            }
-        }
         
         
         BorderPane paneau = new BorderPane();
         BorderPane affichage = new BorderPane();
+        grille = new GrilleVue();
+        initialisationVue = new InitialisationVue();
         FlowPane navire = bouttonNavires();
         
         Label point = new Label("Case : ");
         
-        affichage.setTop(navire);
+        affichage.setTop(initialisationVue);
         affichage.setBottom(point);
-        paneau.setLeft(grid);
+        paneau.setLeft(grille);
         paneau.setRight(affichage);
         
         StackPane root = new StackPane();
@@ -77,25 +73,6 @@ public class SeaBattle extends Application {
         primaryStage.show();
     }
 
-    public void intialisationBtn(){
-        for (int i = 0; i < 100; i++) {
-            buttons [i] = new Button("  ");
-            final int code = i;
-            buttons [i].setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        /*Button btn = (Button)event.getSource();
-                        btn.setDefaultButton(true);*/
-                        System.out.println(navEnCours.getType()+"  "+navEnCours.getPosition());
-                        SelectCase.selectioner(code,navEnCours.getTaille());
-                    }
-                });
-        }
-    }
-    
-    public static void selectCase(int x){
-        buttons[x].setStyle("-fx-base: #b6e7c9;");
-    }
     
     public FlowPane bouttonNavires(){
         FlowPane navire = new FlowPane();

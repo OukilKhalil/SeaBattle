@@ -5,7 +5,7 @@
  */
 package con;
 
-import vue.SeaBattle;
+import vue.GrilleVue;
 
 /**
  *
@@ -13,9 +13,9 @@ import vue.SeaBattle;
  */
 public class SelectCase {
     
-    public static void selectioner(int x, int n){
-        for (int i = x; i < x+n; i++) {
-            SeaBattle.selectCase(i);
+    public static void selectioner(int x){
+        for (int i = x; i < x+5; i++) {
+            GrilleVue.selectCase(i);
         }
         
     }
