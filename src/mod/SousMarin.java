@@ -12,7 +12,7 @@ package mod;
 public class SousMarin extends Navire{
 
     public SousMarin() {
-        super(0, 0, 4, "Sous-Marin", "V");
+        super(0, 0, 4, "Sous-Marin", "H");
     }
 
     public SousMarin(int coordonneeX, int coordonneeY, String position) {

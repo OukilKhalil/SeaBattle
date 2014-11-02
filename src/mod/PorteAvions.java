@@ -12,7 +12,7 @@ package mod;
 public class PorteAvions extends Navire{
 
     public PorteAvions() {
-        super(0, 0, 5, "Porte-Avions", "V");
+        super(0, 0, 5, "Porte-Avions", "H");
     }
 
     public PorteAvions(int coordonneeX, int coordonneeY, String position) {

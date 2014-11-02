@@ -12,7 +12,7 @@ package mod;
 public class Zodiac extends Navire{
 
     public Zodiac() {
-        super(0, 0, 2, "Zodiac", "V");
+        super(0, 0, 2, "Zodiac", "H");
     }
 
     public Zodiac(int coordonneeX, int coordonneeY, String position) {

@@ -32,7 +32,8 @@ public class SeaBattle extends Application {
     private Partie partie;
     private GrilleVue grille;
     private InitialisationVue initialisationVue;
-    private Navire navEnCours;
+    private static int navEnCours;
+    private static Navire navires [] = new Navire[5];
     
     @Override
     public void start(Stage primaryStage) {
@@ -48,13 +49,12 @@ public class SeaBattle extends Application {
         });*/
         
         
-        
+        initialisationNav();
         
         BorderPane paneau = new BorderPane();
         BorderPane affichage = new BorderPane();
         grille = new GrilleVue();
         initialisationVue = new InitialisationVue();
-        FlowPane navire = bouttonNavires();
         
         Label point = new Label("Case : ");
         
@@ -72,9 +72,32 @@ public class SeaBattle extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
     
-    public FlowPane bouttonNavires(){
+    public void initialisationNav(){
+        
+        navires[0] = new PorteAvions();
+        navires[1] = new SousMarin();
+        navires[2] = new Cuirasses();
+        navires[3] = new Cuirasses();
+        navires[4] = new Zodiac();
+        
+    }
+
+    public static int getNavEnCours() {
+        return navEnCours;
+    }
+
+    public static void setNavEnCours(int navEnCours) {
+        SeaBattle.navEnCours = navEnCours;
+    }
+
+    public static Navire getNavires() {
+        return navires[navEnCours];
+    }
+    
+    
+    
+    /*public FlowPane bouttonNavires(){
         FlowPane navire = new FlowPane();
         Button porAvBtn = new Button("Porte-Avions(5)");
         porAvBtn.setOnAction(new EventHandler<ActionEvent>() {

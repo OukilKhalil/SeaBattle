@@ -12,7 +12,7 @@ package mod;
 public class Cuirasses extends Navire{
 
     public Cuirasses() {
-        super(0, 0, 3, "Cuirasses", "V");
+        super(0, 0, 3, "Cuirasses", "H");
     }
 
     public Cuirasses(int coordonneeX, int coordonneeY, String position) {
