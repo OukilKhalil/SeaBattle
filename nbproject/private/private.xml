@@ -5,7 +5,7 @@
             <url>src/vue/InitialisationVue.java</url>
             <bookmark id="1">
                 <name/>
-                <line>31</line>
+                <line>32</line>
                 <key/>
             </bookmark>
         </file>
@@ -18,6 +18,7 @@
             <file>file:/Users/ueve/SeaBattle/src/mod/PorteAvions.java</file>
             <file>file:/Users/ueve/SeaBattle/src/vue/GrilleVue.java</file>
             <file>file:/Users/ueve/SeaBattle/src/mod/Joueur.java</file>
+            <file>file:/Users/ueve/SeaBattle/src/vue/CaseBtn.java</file>
             <file>file:/Users/ueve/SeaBattle/src/mod/Navire.java</file>
             <file>file:/Users/ueve/SeaBattle/src/mod/Grille.java</file>
             <file>file:/Users/ueve/SeaBattle/src/mod/Partie.java</file>

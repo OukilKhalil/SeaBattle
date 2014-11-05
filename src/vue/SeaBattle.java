@@ -29,7 +29,7 @@ import mod.Zodiac;
 public class SeaBattle extends Application {
     
     
-    private Partie partie;
+    private static Partie partie;
     private GrilleVue grille;
     private InitialisationVue initialisationVue;
     private static int navEnCours;
@@ -47,7 +47,7 @@ public class SeaBattle extends Application {
                 System.out.println("Hello World!");
             }
         });*/
-        
+        partie = new Partie();
         
         initialisationNav();
         
@@ -94,7 +94,10 @@ public class SeaBattle extends Application {
     public static Navire getNavires() {
         return navires[navEnCours];
     }
-    
+
+    public static Partie getPartie() {
+        return partie;
+    }
     
     
     /*public FlowPane bouttonNavires(){

@@ -14,11 +14,14 @@ public class Partie {
     private Joueur joueur1;
     private Joueur joueur2;
     private String etape;
-    private Navire navEnCours;
 
     public Partie() {
         joueur1 = new Joueur();
         etape = "Selection";
+    }
+
+    public Joueur getJoueur1() {
+        return joueur1;
     }
     
     

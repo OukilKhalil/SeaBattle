@@ -20,7 +20,8 @@ import javafx.scene.layout.FlowPane;
 public class InitialisationVue extends FlowPane {
 
     private ImageView navires[];
-    private Label navireslbl[];
+    private static Label navireslbl[];
+    
     public InitialisationVue() {
         setPadding(new Insets(5, 0, 5, 0));
         setVgap(4);
@@ -62,5 +63,9 @@ public class InitialisationVue extends FlowPane {
                 navireslbl[j].setDisable(true);
             }
         }
+    }
+    
+    public static Label getLblEnCours(){
+        return navireslbl[SeaBattle.getNavEnCours()];
     }
 }
