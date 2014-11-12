@@ -5,6 +5,10 @@
  */
 package vue;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.RotateTransition;
+import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -12,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
+import javafx.util.Duration;
 
 /**
  *
@@ -19,8 +24,9 @@ import javafx.scene.layout.FlowPane;
  */
 public class InitialisationVue extends FlowPane {
 
-    private ImageView navires[];
+    private static ImageView navires[];
     private static Label navireslbl[];
+    private static boolean selected;
     
     public InitialisationVue() {
         setPadding(new Insets(5, 0, 5, 0));
@@ -28,6 +34,7 @@ public class InitialisationVue extends FlowPane {
         setHgap(4);
         setPrefWrapLength(274); // preferred width allows for two columns
         setStyle("-fx-background-color: DAE6F3;");
+        setSelected(false);
         navireslbl = new Label[5];
         navires = new ImageView[5];
         for (int i = 0; i < 5; i++) {
@@ -41,18 +48,30 @@ public class InitialisationVue extends FlowPane {
                     //desactiverNav(x);
                     SeaBattle.setNavEnCours(x);
                     rotateImage(x);
+                    setSelected(true);
                 }
             });
+            
+ 
             getChildren().add(navireslbl[i]);
         }
+        
     }
 
     public void rotateImage(int i) {
-        if (navires[i].getRotate() == 0) {
-            navires[i].setRotate(-90);
+        if (SeaBattle.getNavires().getPosition().equals("H")) {
+            RotateTransition rt = new RotateTransition(Duration.millis(1500), navireslbl[i]);
+             rt.setByAngle(-90);
+             rt.setAutoReverse(true);
+             rt.play();
             SeaBattle.getNavires().setPosition("V");
+            
+            
         } else {
-            navires[i].setRotate(0);
+            RotateTransition rt = new RotateTransition(Duration.millis(1500), navireslbl[i]);
+             rt.setByAngle(90);
+             rt.setAutoReverse(true);
+             rt.play();
             SeaBattle.getNavires().setPosition("H");
         }
     }
@@ -68,4 +87,17 @@ public class InitialisationVue extends FlowPane {
     public static Label getLblEnCours(){
         return navireslbl[SeaBattle.getNavEnCours()];
     }
+
+    public static ImageView getNavEnCours(){
+        return navires[SeaBattle.getNavEnCours()];
+    }
+    
+    public static boolean isSelected() {
+        return selected;
+    }
+
+    public static void setSelected(boolean selecte) {
+        selected = selecte;
+    }
+    
 }

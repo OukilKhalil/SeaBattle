@@ -10,9 +10,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import mod.Cuirasses;
@@ -37,16 +36,6 @@ public class SeaBattle extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-        /*Grille.intialisation();
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });*/
         partie = new Partie();
         
         initialisationNav();
@@ -54,12 +43,19 @@ public class SeaBattle extends Application {
         BorderPane paneau = new BorderPane();
         BorderPane affichage = new BorderPane();
         grille = new GrilleVue();
+        
         initialisationVue = new InitialisationVue();
         
-        Label point = new Label("Case : ");
-        
+        final Stage primary = primaryStage;
         affichage.setTop(initialisationVue);
-        affichage.setBottom(point);
+        Button rein = new Button("Reinésialiser");
+        rein.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        start(primary);
+                    }
+                });
+        affichage.setBottom(rein);
         paneau.setLeft(grille);
         paneau.setRight(affichage);
         
@@ -71,7 +67,9 @@ public class SeaBattle extends Application {
         primaryStage.setTitle("Sea Battle");
         primaryStage.setScene(scene);
         primaryStage.show();
+        
     }
+    
     
     public void initialisationNav(){
         
@@ -99,59 +97,6 @@ public class SeaBattle extends Application {
         return partie;
     }
     
-    
-    /*public FlowPane bouttonNavires(){
-        FlowPane navire = new FlowPane();
-        Button porAvBtn = new Button("Porte-Avions(5)");
-        porAvBtn.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        if(navEnCours != null){
-                            if(navEnCours.getClass().toString().equals("class mod.PorteAvions")){
-                                if(navEnCours.getPosition().equals("V"))
-                                    navEnCours.setPosition("H");
-                                else navEnCours.setPosition("V");
-                            }
-                        }
-                        
-                        else navEnCours = new PorteAvions();
-                    }
-                });
-        Button souMaBtn = new Button("Sous Marine(4)");
-        souMaBtn.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        navEnCours = new SousMarin();
-                    }
-                });
-        Button cui1Btn = new Button("Cuirasses 1(3)");
-        cui1Btn.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        navEnCours = new Cuirasses();
-                    }
-                });
-        Button cui2Btn = new Button("Cuirasses 2(3)");
-        cui2Btn.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        navEnCours = new Cuirasses();
-                    }
-                });
-        Button zodBtn = new Button("Zodiac(2)");
-        zodBtn.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        navEnCours = new Zodiac();
-                    }
-                });
-        navire.getChildren().add(porAvBtn);
-        navire.getChildren().add(souMaBtn);
-        navire.getChildren().add(cui1Btn);
-        navire.getChildren().add(cui2Btn);
-        navire.getChildren().add(zodBtn);
-        return navire;
-    }
     /**
      * @param args the command line arguments
      */

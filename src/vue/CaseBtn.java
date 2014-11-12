@@ -6,11 +6,14 @@
 package vue;
 
 import con.SelectCase;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import mod.Navire;
+import javafx.util.Duration;
 
 /**
  *
@@ -19,28 +22,50 @@ import mod.Navire;
 public class CaseBtn extends Button {
 
     private int numero;
+    private static double xd,yd;    
+    
     public CaseBtn(int num) {
-        super();
+        super(" ");
         numero = num;
         setPrefSize(50.0, 50.0);
         final int n = num;
         this.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                GrilleVue.select(n);
-                SelectCase.selectioner(n);
+                if(InitialisationVue.isSelected()){
+                    GrilleVue.select(n);
+                    SelectCase.selectioner(n);
+                    InitialisationVue.setSelected(false);
+                    /*Timeline timeline = new Timeline();
+                    timeline.getKeyFrames().addAll(
+                        new KeyFrame(Duration.ZERO, new KeyValue(InitialisationVue.getNavEnCours().translateXProperty(), 0)),
+                        new KeyFrame(new Duration(1000), new KeyValue(InitialisationVue.getNavEnCours().translateXProperty(), -500+getXd())),
+                        new KeyFrame(new Duration(1000), new KeyValue(InitialisationVue.getNavEnCours().translateXProperty(), -getYd()))
+                    );
+                    timeline.setAutoReverse(true);
+                    System.out.println(getXd());
+                    timeline.play();*/
+                }
+            }
+        });
+        setOnMouseClicked(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent me) {
+                xd = me.getSceneX();
+                yd = me.getY();
             }
         });
         this.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                GrilleVue.focusCases(n);
+                if(InitialisationVue.isSelected())
+                    GrilleVue.focusCases(n);
             }
         });
         this.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                GrilleVue.difocusCases(n);
+                if(InitialisationVue.isSelected())
+                    GrilleVue.difocusCases(n);
             }
         });
     }
@@ -59,5 +84,19 @@ public class CaseBtn extends Button {
         return line+10;
     }
     
-    
+     public static double getXd() {
+        return xd;
+    }
+
+    public static void setXd(double x) {
+        xd = x;
+    }
+
+    public static double getYd() {
+        return yd;
+    }
+
+    public static void setYd(double y) {
+        yd = y;
+    }
 }
