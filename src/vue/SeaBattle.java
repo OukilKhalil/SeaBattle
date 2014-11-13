@@ -29,10 +29,13 @@ public class SeaBattle extends Application {
     
     
     private static Partie partie;
-    private GrilleVue grille;
-    private InitialisationVue initialisationVue;
+    private static GrilleVue grille;
+    private static InitialisationVue initialisationVue;
     private static int navEnCours;
+    private static int jouEnCours = 0;
     private static Navire navires [] = new Navire[5];
+    private static BorderPane paneau;
+    private static BorderPane affichage;
     
     @Override
     public void start(Stage primaryStage) {
@@ -40,19 +43,18 @@ public class SeaBattle extends Application {
         
         initialisationNav();
         
-        BorderPane paneau = new BorderPane();
-        BorderPane affichage = new BorderPane();
+        paneau = new BorderPane();
+        affichage = new BorderPane();
         grille = new GrilleVue();
         
         initialisationVue = new InitialisationVue();
         
-        final Stage primary = primaryStage;
         affichage.setTop(initialisationVue);
         Button rein = new Button("Reinésialiser");
         rein.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        start(primary);
+                        actualiser();
                     }
                 });
         affichage.setBottom(rein);
@@ -96,7 +98,26 @@ public class SeaBattle extends Application {
     public static Partie getPartie() {
         return partie;
     }
+
+    public static int getJouEnCours() {
+        return jouEnCours;
+    }
+
+    public static void setJouEnCours(int jouEnCours) {
+        SeaBattle.jouEnCours = jouEnCours;
+    }
     
+    public static void actualiser(){
+        initialisationVue = new InitialisationVue();
+        affichage.setTop(initialisationVue);
+        grille = new GrilleVue();
+        paneau.setLeft(grille);
+    }
+    
+    public static void jouSuivant(){
+        actualiser();
+        jouEnCours = 1;
+    }
     /**
      * @param args the command line arguments
      */

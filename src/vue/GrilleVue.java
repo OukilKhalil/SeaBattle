@@ -21,7 +21,6 @@ import mod.Navire;
 public class GrilleVue extends GridPane{
     
     private static CaseBtn caseBtn [] = new CaseBtn[100];
-    private static double xd,yd;
 
     public GrilleVue() {
         
@@ -35,12 +34,6 @@ public class GrilleVue extends GridPane{
                 add(caseBtn[Integer.parseInt(x)], i, j);
             }
         }
-        setOnMouseClicked(new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent me) {
-                xd = 60;
-                yd = me.getY();
-            }
-        });
     }
     
     public static void select(int x){
@@ -122,21 +115,7 @@ public class GrilleVue extends GridPane{
         }
         return new int[0];
     }
-
-    public static double getXd() {
-        return xd;
-    }
-
-    public static void setXd(double x) {
-        GrilleVue.xd = x;
-    }
-
-    public static double getYd() {
-        return yd;
-    }
-
-    public static void setYd(double y) {
-        GrilleVue.yd = y;
-    }
+    
+   
     
 }

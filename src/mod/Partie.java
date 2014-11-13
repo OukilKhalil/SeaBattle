@@ -5,23 +5,25 @@
  */
 package mod;
 
+import vue.SeaBattle;
+
 /**
  *
  * @author ueve
  */
 public class Partie {
     
-    private Joueur joueur1;
-    private Joueur joueur2;
+    private Joueur joueurs[] = new Joueur[2];
     private String etape;
 
     public Partie() {
-        joueur1 = new Joueur();
+        joueurs[0] = new Joueur();
+        joueurs[1] = new Joueur();
         etape = "Selection";
     }
 
-    public Joueur getJoueur1() {
-        return joueur1;
+    public Joueur getJoueur() {
+        return joueurs[SeaBattle.getJouEnCours()];
     }
     
     

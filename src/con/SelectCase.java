@@ -21,7 +21,7 @@ public class SelectCase {
         SeaBattle.getNavires().setCoordonneeX(cord(num)[0]);
         SeaBattle.getNavires().setCoordonneeY(cord(num)[1]);
         
-        Grille grille = SeaBattle.getPartie().getJoueur1().getGrille();
+        Grille grille = SeaBattle.getPartie().getJoueur().getGrille();
         
         int cases[] = new int[cases(num).length];
         cases = cases(num);

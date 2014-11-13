@@ -47,7 +47,7 @@ public class CaseBtn extends Button {
                     timeline.play();*/
                 }
             }
-        });
+        }); 
         setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent me) {
                 xd = me.getSceneX();

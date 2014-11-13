@@ -26,7 +26,9 @@ public class InitialisationVue extends FlowPane {
 
     private static ImageView navires[];
     private static Label navireslbl[];
+    private RotateTransition rt;
     private static boolean selected;
+    private static int navCreers;
     
     public InitialisationVue() {
         setPadding(new Insets(5, 0, 5, 0));
@@ -35,6 +37,7 @@ public class InitialisationVue extends FlowPane {
         setPrefWrapLength(274); // preferred width allows for two columns
         setStyle("-fx-background-color: DAE6F3;");
         setSelected(false);
+        navCreers = 0;
         navireslbl = new Label[5];
         navires = new ImageView[5];
         for (int i = 0; i < 5; i++) {
@@ -60,7 +63,7 @@ public class InitialisationVue extends FlowPane {
 
     public void rotateImage(int i) {
         if (SeaBattle.getNavires().getPosition().equals("H")) {
-            RotateTransition rt = new RotateTransition(Duration.millis(1500), navireslbl[i]);
+            rt = new RotateTransition(Duration.millis(1000), navireslbl[i]);
              rt.setByAngle(-90);
              rt.setAutoReverse(true);
              rt.play();
@@ -68,7 +71,7 @@ public class InitialisationVue extends FlowPane {
             
             
         } else {
-            RotateTransition rt = new RotateTransition(Duration.millis(1500), navireslbl[i]);
+            rt = new RotateTransition(Duration.millis(1000), navireslbl[i]);
              rt.setByAngle(90);
              rt.setAutoReverse(true);
              rt.play();
@@ -98,6 +101,14 @@ public class InitialisationVue extends FlowPane {
 
     public static void setSelected(boolean selecte) {
         selected = selecte;
+        if (!selecte) {
+            navCreers++;
+            if (navCreers == 5) {
+                SeaBattle.jouSuivant();
+            }
+        }
+        
     }
+    
     
 }
