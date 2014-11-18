@@ -32,10 +32,10 @@ public class CaseBtn extends Button {
         this.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(InitialisationVue.isSelected()){
-                    GrilleVue.select(n);
+                if(SeaBattle.getInitialisationVue().isSelected()){
+                    SeaBattle.getGrille().select(n);
                     SelectCase.selectioner(n);
-                    InitialisationVue.setSelected(false);
+                    SeaBattle.getInitialisationVue().setSelected(false);
                     /*Timeline timeline = new Timeline();
                     timeline.getKeyFrames().addAll(
                         new KeyFrame(Duration.ZERO, new KeyValue(InitialisationVue.getNavEnCours().translateXProperty(), 0)),
@@ -57,15 +57,15 @@ public class CaseBtn extends Button {
         this.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if(InitialisationVue.isSelected())
-                    GrilleVue.focusCases(n);
+                if(SeaBattle.getInitialisationVue().isSelected())
+                    SeaBattle.getGrille().focusCases(n);
             }
         });
         this.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if(InitialisationVue.isSelected())
-                    GrilleVue.difocusCases(n);
+                if(SeaBattle.getInitialisationVue().isSelected())
+                    SeaBattle.getGrille().difocusCases(n);
             }
         });
     }

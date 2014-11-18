@@ -24,11 +24,11 @@ import javafx.util.Duration;
  */
 public class InitialisationVue extends FlowPane {
 
-    private static ImageView navires[];
-    private static Label navireslbl[];
+    private  ImageView navires[];
+    private  Label navireslbl[];
     private RotateTransition rt;
-    private static boolean selected;
-    private static int navCreers;
+    private  boolean selected;
+    private  int navCreers;
     
     public InitialisationVue() {
         setPadding(new Insets(5, 0, 5, 0));
@@ -87,19 +87,19 @@ public class InitialisationVue extends FlowPane {
         }
     }
     
-    public static Label getLblEnCours(){
+    public  Label getLblEnCours(){
         return navireslbl[SeaBattle.getNavEnCours()];
     }
 
-    public static ImageView getNavEnCours(){
+    public  ImageView getNavEnCours(){
         return navires[SeaBattle.getNavEnCours()];
     }
     
-    public static boolean isSelected() {
+    public  boolean isSelected() {
         return selected;
     }
 
-    public static void setSelected(boolean selecte) {
+    public  void setSelected(boolean selecte) {
         selected = selecte;
         if (!selecte) {
             navCreers++;

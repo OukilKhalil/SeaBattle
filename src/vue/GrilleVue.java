@@ -20,7 +20,7 @@ import mod.Navire;
  */
 public class GrilleVue extends GridPane{
     
-    private static CaseBtn caseBtn [] = new CaseBtn[100];
+    private  CaseBtn caseBtn [] = new CaseBtn[100];
 
     public GrilleVue() {
         
@@ -36,7 +36,7 @@ public class GrilleVue extends GridPane{
         }
     }
     
-    public static void select(int x){
+    public void select(int x){
         
         int cases[] = new int[cases(x).length];
         cases = cases(x);
@@ -51,12 +51,12 @@ public class GrilleVue extends GridPane{
             caseBtn[cases[i]].setStyle("");
             caseBtn[cases[i]].setText("");
             caseBtn[cases[i]].setPadding(Insets.EMPTY);
-            InitialisationVue.getLblEnCours().setDisable(true);
+            SeaBattle.getInitialisationVue().getLblEnCours().setDisable(true);
         }
         
     }
     
-    public static void focusCases(int x){
+    public void focusCases(int x){
         
         int cases[] = new int[cases(x).length];
         cases = cases(x);
@@ -71,7 +71,7 @@ public class GrilleVue extends GridPane{
         }
     }
     
-    public static void difocusCases(int x){
+    public void difocusCases(int x){
         
         int cases[] = new int[cases(x).length];
         cases = cases(x);
@@ -86,7 +86,7 @@ public class GrilleVue extends GridPane{
         }
     }
     
-    public static int[] cases(int x){
+    public int[] cases(int x){
         
         Navire nav = SeaBattle.getNavires();
         int t = nav.getTaille();

@@ -118,6 +118,24 @@ public class SeaBattle extends Application {
         actualiser();
         jouEnCours = 1;
     }
+
+    public static GrilleVue getGrille() {
+        return grille;
+    }
+
+    public static void setGrille(GrilleVue grille) {
+        SeaBattle.grille = grille;
+    }
+
+    public static InitialisationVue getInitialisationVue() {
+        return initialisationVue;
+    }
+
+    public static void setInitialisationVue(InitialisationVue initialisationVue) {
+        SeaBattle.initialisationVue = initialisationVue;
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
