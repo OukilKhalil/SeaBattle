@@ -36,6 +36,7 @@ public class SeaBattle extends Application {
     private static Navire navires [] = new Navire[5];
     private static BorderPane paneau;
     private static BorderPane affichage;
+    private static StackPane root;
     
     @Override
     public void start(Stage primaryStage) {
@@ -61,7 +62,7 @@ public class SeaBattle extends Application {
         paneau.setLeft(grille);
         paneau.setRight(affichage);
         
-        StackPane root = new StackPane();
+        root = new StackPane();
         root.getChildren().add(paneau);
         
         Scene scene = new Scene(root);
@@ -108,10 +109,13 @@ public class SeaBattle extends Application {
     }
     
     public static void actualiser(){
-        initialisationVue = new InitialisationVue();
+        /*initialisationVue = new InitialisationVue();
         affichage.setTop(initialisationVue);
         grille = new GrilleVue();
-        paneau.setLeft(grille);
+        paneau.setLeft(grille);*/
+        
+        BattleVue battleVue = new BattleVue();
+        root.getChildren().add(battleVue);
     }
     
     public static void jouSuivant(){
