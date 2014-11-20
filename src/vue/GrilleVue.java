@@ -45,7 +45,7 @@ public class GrilleVue extends GridPane{
             im.setFitHeight(50.0);
             im.setFitWidth(50.0);
             caseBtn[cases[i]].setGraphic(im);
-            if (SeaBattle.getNavires().getPosition().equals("V")) {
+            if (SeaBattle.getPartie().getJoueur().getNavires().getPosition().equals("V")) {
                 caseBtn[cases[i]].setRotate(90);
             }
             caseBtn[cases[i]].setStyle("");
@@ -88,7 +88,7 @@ public class GrilleVue extends GridPane{
     
     public int[] cases(int x){
         
-        Navire nav = SeaBattle.getNavires();
+        Navire nav = SeaBattle.getPartie().getJoueur().getNavires();
         int t = nav.getTaille();
         int tab[] = new int[t];
         if(nav.getPosition().equals("V")){
@@ -116,6 +116,35 @@ public class GrilleVue extends GridPane{
         return new int[0];
     }
     
+    public int[] casesOrdi(int x, int n){
+        
+        Navire nav = SeaBattle.getPartie().getOrdinateur().getNavires(n);
+        int t = nav.getTaille();
+        int tab[] = new int[t];
+        if(nav.getPosition().equals("V")){
+            if (x+t <= caseBtn[x].nextLineV(x)) {
+                for (int i = x; i < x+t; i++) {
+                    if (caseBtn[i].getText().equals("")) {
+                        return new int[0];
+                    }
+                    tab[i-x]= i;
+                }
+                return tab;
+            }
+        }
+        else{
+            if (x+t*10 <= caseBtn[x].nextLineH(x)) {
+                for (int i = x, j=0; i < x+t*10; i=i+10,j++) {
+                    if (caseBtn[i].getText().equals("")) {
+                        return new int[0];
+                    }
+                    tab[j]= i;
+                }
+                return tab;
+            }
+        }
+        return new int[0];
+    }
    
     
 }

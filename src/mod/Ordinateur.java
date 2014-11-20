@@ -5,6 +5,10 @@
  */
 package mod;
 
+import con.OrdinateurCont;
+import java.util.Random;
+import vue.GrilleVue;
+
 /**
  *
  * @author ueve
@@ -13,9 +17,16 @@ public class Ordinateur extends Joueur{
 
     public Ordinateur() {
         super();
+        placer();
     }
     
     public void tirer(){
         
     }
+    
+    public void placer(){
+       OrdinateurCont.placer();
+    }
+    
+  
 }

@@ -17,18 +17,11 @@ public class SelectCase {
     
     public static void selectioner(Integer num){
         
-        SeaBattle.getNavires().setCoordonneeX(cord(num)[0]);
-        SeaBattle.getNavires().setCoordonneeY(cord(num)[1]);
+        SeaBattle.getPartie().getJoueur().getNavires().setCoordonneeX(cord(num)[0]);
+        SeaBattle.getPartie().getJoueur().getNavires().setCoordonneeY(cord(num)[1]);
+        selectionerCrille(num);
         
-        Grille grille = SeaBattle.getPartie().getJoueur().getGrille();
-        
-        int cases[] = new int[SeaBattle.getGrille().cases(num).length];
-        cases = SeaBattle.getGrille().cases(num);
-        for (int i = 0; i < cases.length; i++) {
-            grille.getCasGrille(cord(cases[i])[0], cord(cases[i])[1]).setEtat("Plein");
-        }
-        
-        Navire n = SeaBattle.getNavires();
+        Navire n = SeaBattle.getPartie().getJoueur().getNavires();
         System.out.println(n.getType()+"   "+n.getCoordonneeX()+":"+n.getCoordonneeY()+"   "+n.getPosition());
     }
     
@@ -45,5 +38,14 @@ public class SelectCase {
             tab[1] = Integer.parseInt(val.substring(1, 2));
         }
         return tab;
+    }
+    
+    public static void selectionerCrille(Integer num){
+        Grille grille = SeaBattle.getPartie().getJoueur().getGrille();
+        int cases[] = new int[SeaBattle.getGrille().cases(num).length];
+        cases = SeaBattle.getGrille().cases(num);
+        for (int i = 0; i < cases.length; i++) {
+            grille.getCasGrille(cord(cases[i])[0], cord(cases[i])[1]).setEtat("Plein");
+        }
     }
 }

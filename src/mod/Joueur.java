@@ -5,6 +5,8 @@
  */
 package mod;
 
+import vue.SeaBattle;
+
 /**
  *
  * @author ueve
@@ -17,6 +19,7 @@ public class Joueur {
     public Joueur() {
         grille = new Grille();
         navires = new Navire[5];
+        initialisationNav();
     }
 
     public Grille getGrille() {
@@ -27,6 +30,10 @@ public class Joueur {
         this.grille = grille;
     }
 
+    public Navire getNavires() {
+        return navires[SeaBattle.getNavEnCours()];
+    }
+    
     public Navire getNavires(int i) {
         return navires[i];
     }
@@ -35,5 +42,13 @@ public class Joueur {
         this.navires[i] = navire;
     }
     
-    
+    public void initialisationNav(){
+        
+        navires[0] = new PorteAvions();
+        navires[1] = new SousMarin();
+        navires[2] = new Cuirasses();
+        navires[3] = new Cuirasses();
+        navires[4] = new Zodiac();
+        
+    }
 }

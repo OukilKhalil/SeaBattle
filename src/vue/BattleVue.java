@@ -6,14 +6,16 @@
 package vue;
 
 import javafx.event.EventType;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 /**
  *
  * @author ueve
  */
-public class BattleVue extends BorderPane{
+public class BattleVue extends Stage{
     
     private GrilleVue grilleJ1;
     private GrilleVue grilleJ2;
@@ -21,12 +23,18 @@ public class BattleVue extends BorderPane{
     public BattleVue() {
         this.grilleJ1 = new GrilleVue();
         this.grilleJ2 = new GrilleVue();
+        
         Label lbl = new Label("<      >");
+        BorderPane pan = new BorderPane();
         
-        setLeft(grilleJ1);
-        setRight(grilleJ2);
-        setCenter(lbl);
+        pan.setLeft(grilleJ1);
+        pan.setRight(grilleJ2);
+        pan.setCenter(lbl);
         
+        Scene scene = new Scene(pan);
+        setTitle("Sea Battle");
+        setScene(scene);
+        show();
     }
     
     

@@ -33,7 +33,6 @@ public class SeaBattle extends Application {
     private static InitialisationVue initialisationVue;
     private static int navEnCours;
     private static int jouEnCours = 0;
-    private static Navire navires [] = new Navire[5];
     private static BorderPane paneau;
     private static BorderPane affichage;
     private static StackPane root;
@@ -42,7 +41,6 @@ public class SeaBattle extends Application {
     public void start(Stage primaryStage) {
         partie = new Partie();
         
-        initialisationNav();
         
         paneau = new BorderPane();
         affichage = new BorderPane();
@@ -58,7 +56,15 @@ public class SeaBattle extends Application {
                         actualiser();
                     }
                 });
+        Button battle = new Button("Go To The Battle");
+        battle.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        BattleVue bv = new BattleVue();
+                    }
+                });
         affichage.setBottom(rein);
+        affichage.setCenter(battle);
         paneau.setLeft(grille);
         paneau.setRight(affichage);
         
@@ -72,17 +78,6 @@ public class SeaBattle extends Application {
         primaryStage.show();
         
     }
-    
-    
-    public void initialisationNav(){
-        
-        navires[0] = new PorteAvions();
-        navires[1] = new SousMarin();
-        navires[2] = new Cuirasses();
-        navires[3] = new Cuirasses();
-        navires[4] = new Zodiac();
-        
-    }
 
     public static int getNavEnCours() {
         return navEnCours;
@@ -92,9 +87,6 @@ public class SeaBattle extends Application {
         SeaBattle.navEnCours = navEnCours;
     }
 
-    public static Navire getNavires() {
-        return navires[navEnCours];
-    }
 
     public static Partie getPartie() {
         return partie;
@@ -109,13 +101,10 @@ public class SeaBattle extends Application {
     }
     
     public static void actualiser(){
-        /*initialisationVue = new InitialisationVue();
+        initialisationVue = new InitialisationVue();
         affichage.setTop(initialisationVue);
         grille = new GrilleVue();
-        paneau.setLeft(grille);*/
-        
-        BattleVue battleVue = new BattleVue();
-        root.getChildren().add(battleVue);
+        paneau.setLeft(grille);
     }
     
     public static void jouSuivant(){

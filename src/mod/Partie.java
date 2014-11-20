@@ -18,7 +18,7 @@ public class Partie {
 
     public Partie() {
         joueurs[0] = new Joueur();
-        joueurs[1] = new Joueur();
+        joueurs[1] = new Ordinateur();
         etape = "Selection";
     }
 
@@ -26,5 +26,8 @@ public class Partie {
         return joueurs[SeaBattle.getJouEnCours()];
     }
     
+    public Ordinateur getOrdinateur() {
+        return (Ordinateur) joueurs[1];
+    }
     
 }
