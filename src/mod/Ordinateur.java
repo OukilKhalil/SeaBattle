@@ -17,7 +17,6 @@ public class Ordinateur extends Joueur{
 
     public Ordinateur() {
         super();
-        placer();
     }
     
     public void tirer(){

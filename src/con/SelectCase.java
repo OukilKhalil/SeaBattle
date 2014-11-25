@@ -42,8 +42,8 @@ public class SelectCase {
     
     public static void selectionerCrille(Integer num){
         Grille grille = SeaBattle.getPartie().getJoueur().getGrille();
-        int cases[] = new int[SeaBattle.getGrille().cases(num).length];
-        cases = SeaBattle.getGrille().cases(num);
+        int cases[] = new int[SeaBattle.getGrilleVue().cases(num).length];
+        cases = SeaBattle.getGrilleVue().cases(num);
         for (int i = 0; i < cases.length; i++) {
             grille.getCasGrille(cord(cases[i])[0], cord(cases[i])[1]).setEtat("Plein");
         }

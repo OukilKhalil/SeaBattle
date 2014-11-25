@@ -33,7 +33,7 @@ public class CaseBtn extends Button {
             @Override
             public void handle(ActionEvent event) {
                 if(SeaBattle.getInitialisationVue().isSelected()){
-                    SeaBattle.getGrille().select(n);
+                    SeaBattle.getGrilleVue().select(n);
                     SelectCase.selectioner(n);
                     SeaBattle.getInitialisationVue().setSelected(false);
                     /*Timeline timeline = new Timeline();
@@ -58,14 +58,14 @@ public class CaseBtn extends Button {
             @Override
             public void handle(MouseEvent event) {
                 if(SeaBattle.getInitialisationVue().isSelected())
-                    SeaBattle.getGrille().focusCases(n);
+                    SeaBattle.getGrilleVue().focusCases(n);
             }
         });
         this.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 if(SeaBattle.getInitialisationVue().isSelected())
-                    SeaBattle.getGrille().difocusCases(n);
+                    SeaBattle.getGrilleVue().UnfocusCases(n);
             }
         });
     }
@@ -82,6 +82,14 @@ public class CaseBtn extends Button {
         String val = x.toString();
         int line =Integer.parseInt(val.substring(1, 2))+90;
         return line+10;
+    }
+    
+    public void setFocus(){
+        this.setStyle("-fx-base: #b6e7c9;");
+    }
+    
+    public void setUnFocus(){
+        this.setStyle("");  
     }
     
      public static double getXd() {

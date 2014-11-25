@@ -11,6 +11,7 @@ import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -104,7 +105,8 @@ public class InitialisationVue extends FlowPane {
         if (!selecte) {
             navCreers++;
             if (navCreers == 5) {
-                SeaBattle.jouSuivant();
+                BattleVue bv = new BattleVue();
+                ((Node)(this)).getScene().getWindow().hide();
             }
         }
         

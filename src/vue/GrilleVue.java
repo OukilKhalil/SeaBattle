@@ -66,12 +66,12 @@ public class GrilleVue extends GridPane{
         else{
             for (int i = 0; i < cases.length; i++) {
             if(!caseBtn[cases[i]].getStyle().equals("-fx-base: #b6aaa9;"))
-                caseBtn[cases[i]].setStyle("-fx-base: #b6e7c9;");
+                caseBtn[cases[i]].setFocus();
             }
         }
     }
     
-    public void difocusCases(int x){
+    public void UnfocusCases(int x){
         
         int cases[] = new int[cases(x).length];
         cases = cases(x);
@@ -81,7 +81,7 @@ public class GrilleVue extends GridPane{
         else{
             for (int i = 0; i < cases.length; i++) {
                 if(caseBtn[cases[i]].getStyle().equals("-fx-base: #b6e7c9;"))
-                    caseBtn[cases[i]].setStyle("");  
+                    caseBtn[cases[i]].setUnFocus();
             }
         }
     }
@@ -115,36 +115,9 @@ public class GrilleVue extends GridPane{
         }
         return new int[0];
     }
-    
-    public int[] casesOrdi(int x, int n){
-        
-        Navire nav = SeaBattle.getPartie().getOrdinateur().getNavires(n);
-        int t = nav.getTaille();
-        int tab[] = new int[t];
-        if(nav.getPosition().equals("V")){
-            if (x+t <= caseBtn[x].nextLineV(x)) {
-                for (int i = x; i < x+t; i++) {
-                    if (caseBtn[i].getText().equals("")) {
-                        return new int[0];
-                    }
-                    tab[i-x]= i;
-                }
-                return tab;
-            }
-        }
-        else{
-            if (x+t*10 <= caseBtn[x].nextLineH(x)) {
-                for (int i = x, j=0; i < x+t*10; i=i+10,j++) {
-                    if (caseBtn[i].getText().equals("")) {
-                        return new int[0];
-                    }
-                    tab[j]= i;
-                }
-                return tab;
-            }
-        }
-        return new int[0];
-    }
-   
+
+    public CaseBtn getCaseBtn(int i) {
+        return caseBtn[i];
+    }  
     
 }

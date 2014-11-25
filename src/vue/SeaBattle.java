@@ -8,18 +8,13 @@ package vue;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import mod.Cuirasses;
-import mod.Navire;
 import mod.Partie;
-import mod.PorteAvions;
-import mod.SousMarin;
-import mod.Zodiac;
 
 /**
  *
@@ -29,7 +24,7 @@ public class SeaBattle extends Application {
     
     
     private static Partie partie;
-    private static GrilleVue grille;
+    private static GrilleVue grilleVue;
     private static InitialisationVue initialisationVue;
     private static int navEnCours;
     private static int jouEnCours = 0;
@@ -41,10 +36,9 @@ public class SeaBattle extends Application {
     public void start(Stage primaryStage) {
         partie = new Partie();
         
-        
         paneau = new BorderPane();
         affichage = new BorderPane();
-        grille = new GrilleVue();
+        grilleVue = new GrilleVue();
         
         initialisationVue = new InitialisationVue();
         
@@ -56,21 +50,13 @@ public class SeaBattle extends Application {
                         actualiser();
                     }
                 });
-        Button battle = new Button("Go To The Battle");
-        battle.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        BattleVue bv = new BattleVue();
-                    }
-                });
         affichage.setBottom(rein);
-        affichage.setCenter(battle);
-        paneau.setLeft(grille);
+        paneau.setLeft(grilleVue);
         paneau.setRight(affichage);
         
         root = new StackPane();
         root.getChildren().add(paneau);
-        
+        partie.getOrdinateur().placer();
         Scene scene = new Scene(root);
         
         primaryStage.setTitle("Sea Battle");
@@ -103,8 +89,8 @@ public class SeaBattle extends Application {
     public static void actualiser(){
         initialisationVue = new InitialisationVue();
         affichage.setTop(initialisationVue);
-        grille = new GrilleVue();
-        paneau.setLeft(grille);
+        grilleVue = new GrilleVue();
+        paneau.setLeft(grilleVue);
     }
     
     public static void jouSuivant(){
@@ -112,12 +98,12 @@ public class SeaBattle extends Application {
         jouEnCours = 1;
     }
 
-    public static GrilleVue getGrille() {
-        return grille;
+    public static GrilleVue getGrilleVue() {
+        return grilleVue;
     }
 
-    public static void setGrille(GrilleVue grille) {
-        SeaBattle.grille = grille;
+    public static void setGrilleVue(GrilleVue grille) {
+        SeaBattle.grilleVue = grille;
     }
 
     public static InitialisationVue getInitialisationVue() {

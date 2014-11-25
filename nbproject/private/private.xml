@@ -5,7 +5,7 @@
             <url>src/vue/InitialisationVue.java</url>
             <bookmark id="1">
                 <name/>
-                <line>42</line>
+                <line>43</line>
                 <key/>
             </bookmark>
         </file>
@@ -13,19 +13,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/Users/ueve/SeaBattle/src/con/SelectCase.java</file>
-            <file>file:/Users/ueve/SeaBattle/src/mod/SousMarin.java</file>
             <file>file:/Users/ueve/SeaBattle/src/vue/InitialisationVue.java</file>
-            <file>file:/Users/ueve/SeaBattle/src/mod/PorteAvions.java</file>
             <file>file:/Users/ueve/SeaBattle/src/vue/GrilleVue.java</file>
-            <file>file:/Users/ueve/SeaBattle/src/mod/Joueur.java</file>
+            <file>file:/Users/ueve/SeaBattle/src/con/OrdinateurCont.java</file>
             <file>file:/Users/ueve/SeaBattle/src/vue/CaseBtn.java</file>
-            <file>file:/Users/ueve/SeaBattle/src/mod/Navire.java</file>
-            <file>file:/Users/ueve/SeaBattle/src/mod/Grille.java</file>
-            <file>file:/Users/ueve/SeaBattle/src/mod/Partie.java</file>
-            <file>file:/Users/ueve/SeaBattle/src/mod/Cuirasses.java</file>
+            <file>file:/Users/ueve/SeaBattle/src/vue/BattleVue.java</file>
             <file>file:/Users/ueve/SeaBattle/src/vue/SeaBattle.java</file>
-            <file>file:/Users/ueve/SeaBattle/src/mod/Zodiac.java</file>
-            <file>file:/Users/ueve/SeaBattle/src/mod/Case_Grille.java</file>
         </group>
     </open-files>
 </project-private>
