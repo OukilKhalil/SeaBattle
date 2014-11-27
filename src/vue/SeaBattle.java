@@ -8,12 +8,12 @@ package vue;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import mod.Joueur;
 import mod.Partie;
 
 /**
@@ -27,7 +27,6 @@ public class SeaBattle extends Application {
     private static GrilleVue grilleVue;
     private static InitialisationVue initialisationVue;
     private static int navEnCours;
-    private static int jouEnCours = 0;
     private static BorderPane paneau;
     private static BorderPane affichage;
     private static StackPane root;
@@ -47,12 +46,15 @@ public class SeaBattle extends Application {
         rein.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        actualiser();
+                        BattleVue bv = new BattleVue(grilleVue);
+                        //actualiser();
                     }
                 });
         affichage.setBottom(rein);
         paneau.setLeft(grilleVue);
         paneau.setRight(affichage);
+        
+        
         
         root = new StackPane();
         root.getChildren().add(paneau);
@@ -78,14 +80,6 @@ public class SeaBattle extends Application {
         return partie;
     }
 
-    public static int getJouEnCours() {
-        return jouEnCours;
-    }
-
-    public static void setJouEnCours(int jouEnCours) {
-        SeaBattle.jouEnCours = jouEnCours;
-    }
-    
     public static void actualiser(){
         initialisationVue = new InitialisationVue();
         affichage.setTop(initialisationVue);
@@ -93,11 +87,6 @@ public class SeaBattle extends Application {
         paneau.setLeft(grilleVue);
     }
     
-    public static void jouSuivant(){
-        actualiser();
-        jouEnCours = 1;
-    }
-
     public static GrilleVue getGrilleVue() {
         return grilleVue;
     }
@@ -113,7 +102,6 @@ public class SeaBattle extends Application {
     public static void setInitialisationVue(InitialisationVue initialisationVue) {
         SeaBattle.initialisationVue = initialisationVue;
     }
-    
     
     /**
      * @param args the command line arguments

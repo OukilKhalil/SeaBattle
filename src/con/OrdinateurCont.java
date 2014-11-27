@@ -64,7 +64,7 @@ public class OrdinateurCont {
                 return new int[0];
             }
             for (int j = y; j < y+taille; j++) {
-                if (SeaBattle.getPartie().getOrdinateur().getGrille().getCasGrille(x, y).getEtat().equals("Plein")) {
+                if (SeaBattle.getPartie().getOrdinateur().getGrille().getCasGrille(x, j).getEtat().equals("Plein")) {
                     return new int[0];
                 }
                 tab[j-y] = j;
@@ -79,7 +79,7 @@ public class OrdinateurCont {
                 return new int[0];
             }
             for (int j = x; j < x+taille; j++) {
-                if (grille.getCasGrille(x, y).getEtat().equals("Plein")) {
+                if (SeaBattle.getPartie().getOrdinateur().getGrille().getCasGrille(j, y).getEtat().equals("Plein")) {
                     return new int[0];
                 }
                 tab[j-x] = j;

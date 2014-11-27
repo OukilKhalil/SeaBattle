@@ -5,6 +5,9 @@
  */
 package mod;
 
+import java.util.Iterator;
+import java.util.Vector;
+
 /**
  *
  * @author badr
@@ -17,6 +20,7 @@ public abstract class Navire {
     protected int partie_touchee;
     protected String type;
     protected String position;
+    protected Vector<Point> cases;
     
     
     public Navire(int coordonneeX, int coordonneeY, int taille, String type, String position) {
@@ -26,6 +30,7 @@ public abstract class Navire {
         this.partie_touchee = 0;
         this.type = type;
         this.position = position;
+        cases = new Vector<Point>();
     }
 
     public int getCoordonneeX() {
@@ -34,6 +39,7 @@ public abstract class Navire {
 
     public void setCoordonneeX(int coordonneeX) {
         this.coordonneeX = coordonneeX;
+        actuCord();
     }
 
     public int getCoordonneeY() {
@@ -42,6 +48,7 @@ public abstract class Navire {
 
     public void setCoordonneeY(int coordonneeY) {
         this.coordonneeY = coordonneeY;
+        actuCord();
     }
 
     public int getTaille() {
@@ -58,6 +65,9 @@ public abstract class Navire {
 
     public void setPartie_touchee(int partie_touchee) {
         this.partie_touchee = partie_touchee;
+        if(this.partie_touchee == this.taille){
+            
+        }
     }
 
     public String getType() {
@@ -74,9 +84,30 @@ public abstract class Navire {
 
     public void setPosition(String position) {
         this.position = position;
+        actuCord();
+    }
+
+    public Vector<Point> getCases() {
+        return cases;
+    }
+
+    public void setCases(Vector<Point> cases) {
+        this.cases = cases;
     }
     
-    
-    
-    
+    public void actuCord(){
+        
+        if(position.equals("V")){
+            for (int i = 0; i < taille; i++) {
+                Point p = new Point(coordonneeX, coordonneeY+i);
+                cases.add(i, p);
+            }
+        }
+        else{
+            for (int i = 0; i < taille; i++) {
+                Point p = new Point(coordonneeX+i, coordonneeY);
+                cases.add(i, p);
+            }
+        }
+    }
 }

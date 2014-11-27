@@ -6,6 +6,7 @@
 package mod;
 
 import vue.SeaBattle;
+import static vue.SeaBattle.actualiser;
 
 /**
  *
@@ -15,6 +16,7 @@ public class Partie {
     
     private Joueur joueurs[] = new Joueur[2];
     private String etape;
+    private int jouEnCours = 0;
 
     public Partie() {
         joueurs[0] = new Joueur();
@@ -23,11 +25,23 @@ public class Partie {
     }
 
     public Joueur getJoueur() {
-        return joueurs[SeaBattle.getJouEnCours()];
+        return joueurs[getJouEnCours()];
     }
     
     public Ordinateur getOrdinateur() {
         return (Ordinateur) joueurs[1];
     }
     
+    public  int getJouEnCours() {
+        return jouEnCours;
+    }
+
+    public  void setJouEnCours(int jouEnCours) {
+        this.jouEnCours = jouEnCours;
+    }
+    
+    public void jouSuivant(){
+        actualiser();
+        jouEnCours = 1;
+    }
 }

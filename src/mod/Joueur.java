@@ -15,10 +15,12 @@ public class Joueur {
     
     private Grille grille;
     private Navire navires[];
+    private int navireRestants;
 
     public Joueur() {
         grille = new Grille();
         navires = new Navire[5];
+        navireRestants = 5;
         initialisationNav();
     }
 
@@ -41,6 +43,18 @@ public class Joueur {
     public void setNavires(Navire navire, int i) {
         this.navires[i] = navire;
     }
+
+    public int getNavireRestants() {
+        return navireRestants;
+    }
+
+    public void setNavireRestants(int navireRestants) {
+        this.navireRestants = navireRestants;
+        if(this.navireRestants == 0){
+            
+        }
+    }
+    
     
     public void initialisationNav(){
         
