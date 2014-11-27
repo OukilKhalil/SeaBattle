@@ -16,7 +16,7 @@ public class Partie {
     
     private Joueur joueurs[] = new Joueur[2];
     private String etape;
-    private int jouEnCours = 0;
+    private int jouEnCours = 1;
 
     public Partie() {
         joueurs[0] = new Joueur();

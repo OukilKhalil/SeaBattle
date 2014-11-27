@@ -5,6 +5,7 @@
  */
 package con;
 
+import java.util.Iterator;
 import mod.Joueur;
 import mod.Navire;
 import mod.Point;
@@ -19,14 +20,16 @@ public class JoueurCont {
     public static void tirer(int x, int y){
         Joueur joueur = SeaBattle.getPartie().getJoueur();
         if(joueur.getGrille().getCasGrille(x, y).getEtat().equals("Plein")){
+            System.out.println("Touchéé !!");
             for (int i = 0; i < 5; i++) {
                 Navire nav  = joueur.getNavires(i);
                 if(nav.getCases().contains(new Point(x, y))){
                     nav.setPartie_touchee(nav.getPartie_touchee()+1);
-                    System.out.println("Touchéé !!");
                 }
-                
             }
+        }
+        else{
+            
         }
     }
 }

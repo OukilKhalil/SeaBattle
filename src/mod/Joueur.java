@@ -51,7 +51,7 @@ public class Joueur {
     public void setNavireRestants(int navireRestants) {
         this.navireRestants = navireRestants;
         if(this.navireRestants == 0){
-            
+            System.out.println("Gagner !!!");
         }
     }
     

@@ -5,6 +5,7 @@
  */
 package vue;
 
+import con.JoueurCont;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -56,11 +57,13 @@ public class BattleVue extends Stage{
         
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                grilleVueJ2.getCaseBtn(i+j).setOnMouseClicked(new EventHandler<MouseEvent>() {
-                                                                public void handle(MouseEvent me) {
-
-                                                                }
-                                                            });
+                final int x = i;
+                final int y = j;
+                grilleVueJ2.getCaseBtn(Integer.parseInt(String.valueOf(i)+String.valueOf(j))).setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        public void handle(MouseEvent me) {
+                            JoueurCont.tirer(x, y);
+                        }
+                    });
             }
         }
         pan.setCenter(tour);

@@ -7,6 +7,7 @@ package mod;
 
 import java.util.Iterator;
 import java.util.Vector;
+import vue.SeaBattle;
 
 /**
  *
@@ -66,7 +67,8 @@ public abstract class Navire {
     public void setPartie_touchee(int partie_touchee) {
         this.partie_touchee = partie_touchee;
         if(this.partie_touchee == this.taille){
-            
+            System.out.println("Couler :/ !!!");
+            SeaBattle.getPartie().getJoueur().setNavireRestants(SeaBattle.getPartie().getJoueur().getNavireRestants()-1);
         }
     }
 
@@ -96,17 +98,17 @@ public abstract class Navire {
     }
     
     public void actuCord(){
-        
+        cases = new Vector<Point>();
         if(position.equals("V")){
             for (int i = 0; i < taille; i++) {
                 Point p = new Point(coordonneeX, coordonneeY+i);
-                cases.add(i, p);
+                cases.add(p);
             }
         }
         else{
             for (int i = 0; i < taille; i++) {
                 Point p = new Point(coordonneeX+i, coordonneeY);
-                cases.add(i, p);
+                cases.add(p);
             }
         }
     }
