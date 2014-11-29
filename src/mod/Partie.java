@@ -23,6 +23,10 @@ public class Partie {
         joueurs[1] = new Ordinateur();
         etape = "Selection";
     }
+    
+    public Joueur getJoueur(int i) {
+        return joueurs[i];
+    }
 
     public Joueur getJoueur() {
         return joueurs[getJouEnCours()];

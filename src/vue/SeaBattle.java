@@ -24,7 +24,6 @@ public class SeaBattle extends Application {
     
     
     private static Partie partie;
-    private static GrilleVue grilleVue;
     private static InitialisationVue initialisationVue;
     private static int navEnCours;
     private static BorderPane paneau;
@@ -37,7 +36,7 @@ public class SeaBattle extends Application {
         
         paneau = new BorderPane();
         affichage = new BorderPane();
-        grilleVue = new GrilleVue();
+        final GrilleVue grilleVue = SeaBattle.getPartie().getJoueur(0).getGrille().getVue();
         
         initialisationVue = new InitialisationVue();
         
@@ -83,16 +82,8 @@ public class SeaBattle extends Application {
     public static void actualiser(){
         initialisationVue = new InitialisationVue();
         affichage.setTop(initialisationVue);
-        grilleVue = new GrilleVue();
-        paneau.setLeft(grilleVue);
-    }
-    
-    public static GrilleVue getGrilleVue() {
-        return grilleVue;
-    }
-
-    public static void setGrilleVue(GrilleVue grille) {
-        SeaBattle.grilleVue = grille;
+        SeaBattle.getPartie().getJoueur(0).getGrille().setVue(new GrilleVue());
+        paneau.setLeft(SeaBattle.getPartie().getJoueur(0).getGrille().getVue());
     }
 
     public static InitialisationVue getInitialisationVue() {

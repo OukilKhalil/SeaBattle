@@ -5,6 +5,7 @@
  */
 package mod;
 
+import con.NavireCont;
 import java.util.Iterator;
 import java.util.Vector;
 import vue.SeaBattle;
@@ -21,9 +22,8 @@ public abstract class Navire {
     protected int partie_touchee;
     protected String type;
     protected String position;
-    protected Vector<Point> cases;
-    
-    
+    protected Vector<CaseGrille> cases;
+
     public Navire(int coordonneeX, int coordonneeY, int taille, String type, String position) {
         this.coordonneeX = coordonneeX;
         this.coordonneeY = coordonneeY;
@@ -31,7 +31,7 @@ public abstract class Navire {
         this.partie_touchee = 0;
         this.type = type;
         this.position = position;
-        cases = new Vector<Point>();
+        cases = new Vector<CaseGrille>();
     }
 
     public int getCoordonneeX() {
@@ -67,8 +67,7 @@ public abstract class Navire {
     public void setPartie_touchee(int partie_touchee) {
         this.partie_touchee = partie_touchee;
         if(this.partie_touchee == this.taille){
-            System.out.println("Couler :/ !!!");
-            SeaBattle.getPartie().getJoueur().setNavireRestants(SeaBattle.getPartie().getJoueur().getNavireRestants()-1);
+            NavireCont.couler(this);
         }
     }
 
@@ -89,26 +88,26 @@ public abstract class Navire {
         actuCord();
     }
 
-    public Vector<Point> getCases() {
+    public Vector<CaseGrille> getCases() {
         return cases;
     }
 
-    public void setCases(Vector<Point> cases) {
+    public void setCases(Vector<CaseGrille> cases) {
         this.cases = cases;
     }
     
     public void actuCord(){
-        cases = new Vector<Point>();
+        cases = new Vector<CaseGrille>();
         if(position.equals("V")){
             for (int i = 0; i < taille; i++) {
-                Point p = new Point(coordonneeX, coordonneeY+i);
-                cases.add(p);
+                CaseGrille cg = new CaseGrille("Plein", coordonneeX, coordonneeY+i);
+                cases.add(cg);
             }
         }
         else{
             for (int i = 0; i < taille; i++) {
-                Point p = new Point(coordonneeX+i, coordonneeY);
-                cases.add(p);
+                CaseGrille cg = new CaseGrille("Plein", coordonneeX+i, coordonneeY);
+                cases.add(cg);
             }
         }
     }

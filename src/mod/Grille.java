@@ -5,23 +5,36 @@
  */
 package mod;
 
+import vue.GrilleVue;
+
 /**
  *
  * @author badr
  */
 public class Grille {
     
-    private Case_Grille grille[][] = new Case_Grille[10][10];
+    private CaseGrille grille[][] = new CaseGrille[10][10];
+    private GrilleVue vue = new GrilleVue();
 
     public Grille() {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                grille[i][j] = new Case_Grille();
+                grille[i][j] = new CaseGrille("Vide",i,j);
             }
         }
     }
 
-    public Case_Grille getCasGrille(int i, int j) {
+    public CaseGrille getCasGrille(int i, int j) {
         return grille[i][j];
     }
+
+    public GrilleVue getVue() {
+        return vue;
+    }
+
+    public void setVue(GrilleVue vue) {
+        this.vue = vue;
+    }
+    
+    
 }

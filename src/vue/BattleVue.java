@@ -27,8 +27,7 @@ public class BattleVue extends Stage{
     private GrilleVue grilleVueJ2;
 
     public BattleVue(GrilleVue gv) {
-        this.grilleVueJ1 = new GrilleVue();
-        this.grilleVueJ2 = new GrilleVue();
+        this.grilleVueJ2 = SeaBattle.getPartie().getJoueur(1).getGrille().getVue();
         this.grilleVueJ1 = gv;
         BorderPane tour = new BorderPane();
         ImageView im1 = new ImageView(new Image(GrilleVue.class.getResourceAsStream("/ressources/icons/fleche5.png")));

@@ -7,20 +7,35 @@ package mod;
 
 /**
  *
- * @author ueve
+ * @author badr
  */
-public class Point {
+public class CaseGrille {
     
+    private String etat;
     private int x;
     private int y;
-
     
-    public Point() {
+    public CaseGrille() {
+        etat = "Vide";
     }
-
-    public Point(int x, int y) {
+    
+    public CaseGrille(String etat, int x, int y) {
+        this.etat = etat;
         this.x = x;
         this.y = y;
+    }
+    
+
+    public CaseGrille(String etat) {
+        this.etat = etat;
+    }
+
+    public String getEtat() {
+        return etat;
+    }
+
+    public void setEtat(String etat) {
+        this.etat = etat;
     }
 
     public int getX() {
@@ -38,8 +53,7 @@ public class Point {
     public void setY(int y) {
         this.y = y;
     }
-
-   
+    
 
     @Override
     public boolean equals(Object obj) {
@@ -49,7 +63,7 @@ public class Point {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Point other = (Point) obj;
+        final CaseGrille other = (CaseGrille) obj;
         if (this.x != other.x) {
             return false;
         }
@@ -58,5 +72,6 @@ public class Point {
         }
         return true;
     }
+    
     
 }
