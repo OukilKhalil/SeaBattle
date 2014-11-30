@@ -32,7 +32,7 @@ public class JoueurCont {
         ImageView im2 = new ImageView(new Image(GrilleVue.class.getResourceAsStream("/ressources/icons/empty.png")));
         im2.setFitHeight(50.0);
         im2.setFitWidth(50.0);
-        CaseBtn cb = SeaBattle.getPartie().getJoueur(1).getGrille().getVue().getCaseBtn(Integer.parseInt(String.valueOf(x)+String.valueOf(y)));
+        CaseBtn cb = SeaBattle.getPartie().getJoueur().getGrille().getVue().getCaseBtn(Integer.parseInt(String.valueOf(x)+String.valueOf(y)));
         cb.setPadding(Insets.EMPTY);
         if(joueur.getGrille().getCasGrille(x, y).getEtat().equals("Plein")){
             cb.setGraphic(im);
@@ -50,10 +50,13 @@ public class JoueurCont {
             cb.setStyle("");
             cb.setText("");
         }
+        joueur.getGrille().getCasGrille(x, y).setEtat("Tirer");
         cb.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         public void handle(MouseEvent me) {
                             
                         }
                     });
+        
+        SeaBattle.getPartie().setJouEnCours();
     }
 }

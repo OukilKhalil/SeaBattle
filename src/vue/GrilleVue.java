@@ -8,6 +8,7 @@ package vue;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -21,7 +22,9 @@ import mod.Navire;
 public class GrilleVue extends GridPane{
     
     private  CaseBtn caseBtn [] = new CaseBtn[100];
-
+    private Label lbl;
+    private ImageView im;
+    
     public GrilleVue() {
         
         for (int i = 0; i < 100; i++) {
@@ -34,6 +37,17 @@ public class GrilleVue extends GridPane{
                 add(caseBtn[Integer.parseInt(x)], i, j);
             }
         }
+        im = new ImageView(new Image(GrilleVue.class.getResourceAsStream("/ressources/icons/fleche5.png")));
+        im.setRotate(180.0);
+        im.setFitHeight(50.0);
+        im.setFitWidth(50.0);
+        lbl = new Label("", im);
+        
+        
+        lbl.setDisable(true);
+        
+
+        lbl.setPrefHeight(500.0);
     }
     
     public void select(int x){
@@ -116,6 +130,19 @@ public class GrilleVue extends GridPane{
         return new int[0];
     }
 
+    public Label getLbl() {
+        return lbl;
+    }
+
+    public void setLbl(Label j1) {
+        this.lbl = j1;
+    }
+    
+    public void rotDroit(){
+        im.setRotate(360.0);
+    }
+   
+    
     public CaseBtn getCaseBtn(int i) {
         return caseBtn[i];
     }  

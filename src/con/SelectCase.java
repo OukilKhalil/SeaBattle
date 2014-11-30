@@ -5,6 +5,8 @@
  */
 package con;
 
+import java.util.Iterator;
+import mod.CaseGrille;
 import mod.Grille;
 import mod.Navire;
 import vue.SeaBattle;
@@ -41,11 +43,11 @@ public class SelectCase {
     }
     
     public static void selectionerCrille(Integer num){
+        Iterator<CaseGrille> it = SeaBattle.getPartie().getJoueur().getNavires().getCases().iterator();
         Grille grille = SeaBattle.getPartie().getJoueur().getGrille();
-        int cases[] = new int[SeaBattle.getPartie().getJoueur(0).getGrille().getVue().cases(num).length];
-        cases = SeaBattle.getPartie().getJoueur(0).getGrille().getVue().cases(num);
-        for (int i = 0; i < cases.length; i++) {
-            grille.getCasGrille(cord(cases[i])[0], cord(cases[i])[1]).setEtat("Plein");
+        while (it.hasNext()) {
+            CaseGrille cg = it.next();
+            grille.getCasGrille(cg.getX(), cg.getY()).setEtat("Plein");
         }
     }
 }

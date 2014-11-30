@@ -5,6 +5,7 @@
  */
 package mod;
 
+import con.OrdinateurCont;
 import vue.SeaBattle;
 import static vue.SeaBattle.actualiser;
 
@@ -16,12 +17,13 @@ public class Partie {
     
     private Joueur joueurs[] = new Joueur[2];
     private String etape;
-    private int jouEnCours = 1;
+    private int jouEnCours;
 
     public Partie() {
         joueurs[0] = new Joueur();
         joueurs[1] = new Ordinateur();
         etape = "Selection";
+        jouEnCours = 0;
     }
     
     public Joueur getJoueur(int i) {
@@ -40,12 +42,21 @@ public class Partie {
         return jouEnCours;
     }
 
-    public  void setJouEnCours(int jouEnCours) {
-        this.jouEnCours = jouEnCours;
+    public void setJouEnCours() {
+        if (jouEnCours == 0) {
+            jouEnCours = 1;
+            SeaBattle.getPartie().getJoueur(0).getGrille().getVue().getLbl().setDisable(true);
+            SeaBattle.getPartie().getJoueur(1).getGrille().getVue().getLbl().setDisable(false);
+        }
+        else{
+            jouEnCours = 0;
+            SeaBattle.getPartie().getJoueur(1).getGrille().getVue().getLbl().setDisable(true);
+            SeaBattle.getPartie().getJoueur(0).getGrille().getVue().getLbl().setDisable(false);
+            OrdinateurCont.tirer();
+        }
     }
     
     public void jouSuivant(){
         actualiser();
-        jouEnCours = 1;
     }
 }

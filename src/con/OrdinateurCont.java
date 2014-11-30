@@ -41,6 +41,15 @@ public class OrdinateurCont {
         }
     }
     
+    public static void tirer(){
+        int xy[] = new int[2];
+        xy = xy();
+        while(SeaBattle.getPartie().getJoueur().getGrille().getCasGrille(xy[0], xy[1]).getEtat().equals("Tirer")){
+            xy = xy();
+        }
+        JoueurCont.tirer(xy[0], xy[1]);
+    }
+    
     private static int[] xy(){
         
         int tab[] = new int[2];

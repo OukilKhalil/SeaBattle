@@ -8,12 +8,8 @@ package vue;
 import con.JoueurCont;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import mod.Grille;
 
@@ -25,29 +21,16 @@ public class BattleVue extends Stage{
     
     private GrilleVue grilleVueJ1;
     private GrilleVue grilleVueJ2;
+    
 
     public BattleVue(GrilleVue gv) {
         this.grilleVueJ2 = SeaBattle.getPartie().getJoueur(1).getGrille().getVue();
         this.grilleVueJ1 = gv;
         BorderPane tour = new BorderPane();
-        ImageView im1 = new ImageView(new Image(GrilleVue.class.getResourceAsStream("/ressources/icons/fleche5.png")));
-        im1.setRotate(180.0);
-        im1.setFitHeight(50.0);
-        im1.setFitWidth(50.0);
-        Label lbl1 = new Label("", im1);
-        ImageView im2 = new ImageView(new Image(GrilleVue.class.getResourceAsStream("/ressources/icons/fleche5.png")));
-        im2.setRotate(360.0);
-        im2.setFitHeight(50.0);
-        im2.setFitWidth(50.0);
-        Label lbl2 = new Label("", im2);
         
-        lbl1.setDisable(true);
-        
-
-        lbl1.setPrefHeight(500.0);
-        lbl2.setPrefHeight(500.0);
-        tour.setLeft(lbl1);
-        tour.setRight(lbl2);
+        grilleVueJ2.rotDroit();
+        tour.setLeft(grilleVueJ1.getLbl());
+        tour.setRight(grilleVueJ2.getLbl());
         
         BorderPane pan = new BorderPane();
         

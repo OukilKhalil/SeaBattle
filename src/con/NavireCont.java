@@ -19,12 +19,11 @@ public class NavireCont {
     
     public static void couler(Navire n){
         Iterator<CaseGrille> cases = n.getCases().iterator();
-        GrilleVue gv = SeaBattle.getPartie().getJoueur(1).getGrille().getVue();
+        GrilleVue gv = SeaBattle.getPartie().getJoueur().getGrille().getVue();
         while (cases.hasNext()) {
             CaseGrille cg = cases.next();
             gv.getCaseBtn(Integer.parseInt(String.valueOf(cg.getX())+String.valueOf(cg.getY()))).setDisable(true);
-            SeaBattle.getPartie().getJoueur(1).setNavireRestants(SeaBattle.getPartie().getJoueur().getNavireRestants()-1);
         }
-        
+        SeaBattle.getPartie().getJoueur().setNavireRestants(SeaBattle.getPartie().getJoueur().getNavireRestants()-1);
     }
 }

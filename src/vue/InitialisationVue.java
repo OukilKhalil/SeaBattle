@@ -63,18 +63,18 @@ public class InitialisationVue extends FlowPane {
     }
 
     public void rotateImage(int i) {
-        if (SeaBattle.getPartie().getJoueur(0).getNavires().getPosition().equals("H")) {
+        if (SeaBattle.getPartie().getJoueur().getNavires().getPosition().equals("H")) {
             rt = new RotateTransition(Duration.millis(500), navireslbl[i]);
             rt.setByAngle(-90);
             rt.setAutoReverse(true);
             rt.play();
-            SeaBattle.getPartie().getJoueur(0).getNavires().setPosition("V");
+            SeaBattle.getPartie().getJoueur().getNavires().setPosition("V");
         } else {
             rt = new RotateTransition(Duration.millis(500), navireslbl[i]);
             rt.setByAngle(90);
             rt.setAutoReverse(true);
             rt.play();
-            SeaBattle.getPartie().getJoueur(0).getNavires().setPosition("H");
+            SeaBattle.getPartie().getJoueur().getNavires().setPosition("H");
         }
     }
     
@@ -103,7 +103,8 @@ public class InitialisationVue extends FlowPane {
         if (!selecte) {
             navCreers++;
             if (navCreers == 5) {
-                BattleVue bv = new BattleVue(SeaBattle.getPartie().getJoueur(0).getGrille().getVue());
+                BattleVue bv = new BattleVue(SeaBattle.getPartie().getJoueur().getGrille().getVue());
+                SeaBattle.getPartie().setJouEnCours();
                 ((Node)(this)).getScene().getWindow().hide();
             }
         }
