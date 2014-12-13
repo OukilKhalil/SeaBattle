@@ -16,14 +16,12 @@ import static vue.SeaBattle.actualiser;
 public class Partie {
     
     private Joueur joueurs[] = new Joueur[2];
-    private String etape;
     private int jouEnCours;
 
     public Partie() {
         joueurs[0] = new Joueur();
         joueurs[1] = new Ordinateur();
-        etape = "Selection";
-        jouEnCours = 0;
+        jouEnCours = 1;
     }
     
     public Joueur getJoueur(int i) {
@@ -42,6 +40,10 @@ public class Partie {
         return jouEnCours;
     }
 
+    public void setJouEnCours(int jouEnCours) {
+        this.jouEnCours = jouEnCours;
+    }
+
     public void setJouEnCours() {
         if (jouEnCours == 0) {
             jouEnCours = 1;
@@ -53,6 +55,8 @@ public class Partie {
             SeaBattle.getPartie().getJoueur(1).getGrille().getVue().getLbl().setDisable(true);
             SeaBattle.getPartie().getJoueur(0).getGrille().getVue().getLbl().setDisable(false);
             OrdinateurCont.tirer();
+            long t = System.currentTimeMillis();
+            //while(System.currentTimeMillis()<t+1000);
         }
     }
     

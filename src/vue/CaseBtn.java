@@ -12,8 +12,12 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
+import mod.CaseGrille;
+import mod.Configuration;
 
 /**
  *
@@ -92,7 +96,31 @@ public class CaseBtn extends Button {
         this.setStyle("");  
     }
     
-     public static double getXd() {
+    public void setExplosion(){
+        ImageView im = new ImageView(new Image(GrilleVue.class.getResourceAsStream("/ressources/icons/explosion.png")));
+        im.setFitHeight(50.0);
+        im.setFitWidth(50.0);
+        
+        this.setGraphic(im);
+    }
+    
+    public void setEmpty(){
+        if(Configuration.getTypePartie().equals("Bataille Navale")){
+            ImageView im = new ImageView(new Image(GrilleVue.class.getResourceAsStream("/ressources/icons/empty.png")));
+            im.setFitHeight(50.0);
+            im.setFitWidth(50.0);
+
+            this.setGraphic(im);
+            this.setText("");
+        }
+        else{
+            CaseGrille cs = new CaseGrille("Vide", SelectCase.cord(numero)[0], SelectCase.cord(numero)[1]);
+            
+            this.setText(String.valueOf(SeaBattle.getPartie().getJoueur().getGrille().procheCible(cs)));
+        }
+    }
+    
+    public static double getXd() {
         return xd;
     }
 

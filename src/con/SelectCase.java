@@ -28,7 +28,7 @@ public class SelectCase {
     }
     
     
-    private static int[] cord(Integer num){
+    public static int[] cord(Integer num){
         int tab[] = new int[2];
         if (num <10) {
             tab[0] = 0;

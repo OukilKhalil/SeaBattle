@@ -12,20 +12,8 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/ueve/SeaBattle/src/con/SelectCase.java</file>
-            <file>file:/Users/ueve/SeaBattle/src/vue/InitialisationVue.java</file>
-            <file>file:/Users/ueve/SeaBattle/src/vue/GrilleVue.java</file>
-            <file>file:/Users/ueve/SeaBattle/src/mod/Joueur.java</file>
-            <file>file:/Users/ueve/SeaBattle/src/vue/CaseBtn.java</file>
-            <file>file:/Users/ueve/SeaBattle/src/vue/BattleVue.java</file>
-            <file>file:/Users/ueve/SeaBattle/src/mod/Navire.java</file>
-            <file>file:/Users/ueve/SeaBattle/src/mod/Partie.java</file>
-            <file>file:/Users/ueve/SeaBattle/src/mod/Grille.java</file>
-            <file>file:/Users/ueve/SeaBattle/src/mod/CaseGrille.java</file>
-            <file>file:/Users/ueve/SeaBattle/src/vue/SeaBattle.java</file>
             <file>file:/Users/ueve/SeaBattle/src/con/JoueurCont.java</file>
             <file>file:/Users/ueve/SeaBattle/src/con/OrdinateurCont.java</file>
-            <file>file:/Users/ueve/SeaBattle/src/con/NavireCont.java</file>
         </group>
     </open-files>
 </project-private>

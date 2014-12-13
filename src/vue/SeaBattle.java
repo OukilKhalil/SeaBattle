@@ -5,22 +5,23 @@
  */
 package vue;
 
-import javafx.application.Application;
+import con.JoueurCont;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import mod.Joueur;
 import mod.Partie;
 
 /**
  *
  * @author badr
  */
-public class SeaBattle extends Application {
+public class SeaBattle extends Stage {
     
     
     private static Partie partie;
@@ -30,8 +31,7 @@ public class SeaBattle extends Application {
     private static BorderPane affichage;
     private static StackPane root;
     
-    @Override
-    public void start(Stage primaryStage) {
+    public SeaBattle() {
         partie = new Partie();
         
         paneau = new BorderPane();
@@ -45,25 +45,41 @@ public class SeaBattle extends Application {
         rein.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        BattleVue bv = new BattleVue(grilleVue);
-                        //actualiser();
+                        actualiser();
                     }
                 });
-        affichage.setBottom(rein);
+        Button auto = new Button("AUTO");
+        auto.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        actualiser();
+                        JoueurCont.placerAuto();
+                    }
+                });
+        Button go = new Button("To The Battle");
+        go.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        BattleVue bv = new BattleVue(SeaBattle.getPartie().getJoueur().getGrille().getVue());
+                        SeaBattle.getPartie().setJouEnCours();
+                        ((Node)(event.getSource())).getScene().getWindow().hide();
+                    }
+                });
+        VBox vbox = new VBox(auto, rein, go);
+        affichage.setBottom(vbox);
+        
         paneau.setLeft(grilleVue);
         paneau.setRight(affichage);
-        
-        
         
         root = new StackPane();
         root.getChildren().add(paneau);
         partie.getOrdinateur().placer();
+        partie.setJouEnCours(0);
         Scene scene = new Scene(root);
         
-        primaryStage.setTitle("Sea Battle");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-        
+        setTitle("Sea Battle");
+        setScene(scene);
+        show();
     }
 
     public static int getNavEnCours() {
@@ -92,13 +108,6 @@ public class SeaBattle extends Application {
 
     public static void setInitialisationVue(InitialisationVue initialisationVue) {
         SeaBattle.initialisationVue = initialisationVue;
-    }
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        launch(args);
     }
     
 }

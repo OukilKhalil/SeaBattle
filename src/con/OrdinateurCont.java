@@ -6,9 +6,8 @@
 package con;
 
 import java.util.Random;
+import mod.CaseGrille;
 import mod.Grille;
-import mod.Navire;
-import vue.GrilleVue;
 import vue.SeaBattle;
 
 /**
@@ -17,34 +16,77 @@ import vue.SeaBattle;
  */
 public class OrdinateurCont {
     
-    
-    
-    public static void placer(){
-        
-        GrilleVue gv = new GrilleVue();
-        for (int i = 0; i < 5; i++) {
-            int cases[];
-            Random rand = new Random();
-            int nbr = rand.nextInt(2 - 1 + 1) + 1;
-            char pos = nbr == 2 ? 'H' : 'V';
-            SeaBattle.getPartie().getOrdinateur().getNavires(i).setPosition(String.valueOf(pos));
-            int xy[] = xy();
-            while (cases(xy[0], xy[1], i).length==0) {
-                xy = xy();
-            }
-            
-            SeaBattle.getPartie().getOrdinateur().getNavires(i).setCoordonneeX(xy[0]);
-            SeaBattle.getPartie().getOrdinateur().getNavires(i).setCoordonneeY(xy[1]);
-            
-            Navire n = SeaBattle.getPartie().getOrdinateur().getNavires(i);
-            System.out.println(n.getType()+"   "+n.getCoordonneeX()+":"+n.getCoordonneeY()+"   "+n.getPosition());
-        }
-    }
+    private static CaseGrille derniereCase = null;
+    private static int dirEnCours = 0;
     
     public static void tirer(){
+        
+        Grille grille = SeaBattle.getPartie().getJoueur().getGrille();
+        if(derniereCase != null){
+            String direction[] = {"G", "D", "H" , "B"};
+            
+            switch (direction[dirEnCours]) {
+                case "G":
+                    if(derniereCase.getX()-1 >= 0){
+                        if(!grille.getCasGrille(derniereCase.getX()-1, derniereCase.getY()).getEtat().equals("Tirer")){
+                            JoueurCont.tirer(derniereCase.getX()-1, derniereCase.getY());
+                            break;
+                        }
+                        else{
+                            dirEnCours = 1;
+                        }
+                    }
+                    else{
+                            dirEnCours = 1;
+                    }
+                case "D":
+                    if(derniereCase.getX()+1 <= 10){
+                        if(!grille.getCasGrille(derniereCase.getX()-+1, derniereCase.getY()).getEtat().equals("Tirer")){
+                            JoueurCont.tirer(derniereCase.getX()+1, derniereCase.getY());
+                            break;
+                        }
+                        else{
+                            dirEnCours = 2;
+                        }
+                    }
+                    else{
+                            dirEnCours = 2;
+                    }
+                case "H":
+                    if(derniereCase.getY()-1 >= 0){
+                        if(!grille.getCasGrille(derniereCase.getX(), derniereCase.getY()+1).getEtat().equals("Tirer")){
+                            JoueurCont.tirer(derniereCase.getX(), derniereCase.getY()+1);
+                            break;
+                        }
+                        else{
+                            dirEnCours = 3;
+                        }
+                    }
+                    else{
+                            dirEnCours = 3; 
+                    }
+                case "B":
+                    if(derniereCase.getY()+1 <= 10){
+                        if(!grille.getCasGrille(derniereCase.getX(), derniereCase.getY()-1).getEtat().equals("Tirer")){
+                            JoueurCont.tirer(derniereCase.getX(), derniereCase.getY()-1 );
+                            break;
+                        }
+                        else{
+                            dirEnCours = 0;
+                        }
+                    }
+                    else{
+                            dirEnCours = 0;
+                    }
+                default:
+                    throw new AssertionError();
+            }
+        }
+        
+        
         int xy[] = new int[2];
         xy = xy();
-        while(SeaBattle.getPartie().getJoueur().getGrille().getCasGrille(xy[0], xy[1]).getEtat().equals("Tirer")){
+        while(grille.getCasGrille(xy[0], xy[1]).getEtat().equals("Tirer")){
             xy = xy();
         }
         JoueurCont.tirer(xy[0], xy[1]);
@@ -60,43 +102,21 @@ public class OrdinateurCont {
 
         return tab;
     }
-    
-    public static int[] cases(int x, int y,int i){
-        
-        String pos = SeaBattle.getPartie().getOrdinateur().getNavires(i).getPosition();
-        int taille = SeaBattle.getPartie().getOrdinateur().getNavires(i).getTaille();
-        Grille grille = SeaBattle.getPartie().getOrdinateur().getGrille();
-        int tab[] = new int[taille];
-        
-        if(pos.equals("V")){
-            if(taille+y > 10){
-                return new int[0];
-            }
-            for (int j = y; j < y+taille; j++) {
-                if (SeaBattle.getPartie().getOrdinateur().getGrille().getCasGrille(x, j).getEtat().equals("Plein")) {
-                    return new int[0];
-                }
-                tab[j-y] = j;
-            }
-            for (int j = y; j < y+taille; j++) {
-                grille.getCasGrille(x, j).setEtat("Plein");
-            }
-            
-        }
-        else{
-            if(taille+x > 10){
-                return new int[0];
-            }
-            for (int j = x; j < x+taille; j++) {
-                if (SeaBattle.getPartie().getOrdinateur().getGrille().getCasGrille(j, y).getEtat().equals("Plein")) {
-                    return new int[0];
-                }
-                tab[j-x] = j;
-            }
-            for (int j = x; j < x+taille; j++) {
-                grille.getCasGrille(j, y).setEtat("Plein");
-            }
-        }
-        return tab;
+ 
+    public static CaseGrille getDerniereCase() {
+        return derniereCase;
     }
+
+    public static void setDerniereCase(CaseGrille derniereCase) {
+        OrdinateurCont.derniereCase = derniereCase;
+    }
+
+    public static int getDirEnCours() {
+        return dirEnCours;
+    }
+
+    public static void setDirEnCours(int dirEnCours) {
+        OrdinateurCont.dirEnCours = dirEnCours;
+    }
+
 }

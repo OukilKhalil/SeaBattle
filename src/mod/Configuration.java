@@ -5,26 +5,20 @@
  */
 package mod;
 
-
-import con.JoueurCont;
-
 /**
  *
  * @author ueve
  */
-public class Ordinateur extends Joueur{
+public class Configuration {
+    
+    private static String typePartie;
 
-    public Ordinateur() {
-        super();
+    public static String getTypePartie() {
+        return typePartie;
+    }
+
+    public static void setTypePartie(String typePartie) {
+        Configuration.typePartie = typePartie;
     }
     
-    public void tirer(){
-        
-    }
-    
-    public void placer(){
-       JoueurCont.placerAuto();
-    }
-    
-  
 }
