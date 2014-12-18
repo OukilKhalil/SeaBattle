@@ -55,17 +55,17 @@ public class GrilleVue extends GridPane{
         int cases[] = new int[cases(x).length];
         cases = cases(x);
         for (int i = 0; i < cases.length; i++) {
-            ImageView im = new ImageView(new Image(GrilleVue.class.getResourceAsStream("/ressources/icons/n"+(SeaBattle.getNavEnCours()+1)+"/" + (i + 1) + ".png")));
+            ImageView im = new ImageView(new Image(GrilleVue.class.getResourceAsStream("/ressources/icons/n"+(InitialisationVue.getNavEnCours()+1)+"/" + (i + 1) + ".png")));
             im.setFitHeight(50.0);
             im.setFitWidth(50.0);
             caseBtn[cases[i]].setGraphic(im);
-            if (SeaBattle.getPartie().getJoueur(0).getNavires().getPosition().equals("V")) {
+            if (Accueil.getPartie().getJoueur(0).getNavires().getPosition().equals("V")) {
                 caseBtn[cases[i]].setRotate(90);
             }
             caseBtn[cases[i]].setStyle("");
             caseBtn[cases[i]].setText("");
             caseBtn[cases[i]].setPadding(Insets.EMPTY);
-            SeaBattle.getInitialisationVue().getLblEnCours().setDisable(true);
+            InitialisationVue.getNavirePaneVue().getLblEnCours().setDisable(true);
         }
         
     }
@@ -102,7 +102,7 @@ public class GrilleVue extends GridPane{
     
     public int[] cases(int x){
         
-        Navire nav = SeaBattle.getPartie().getJoueur(0).getNavires();
+        Navire nav = Accueil.getPartie().getJoueur(0).getNavires();
         int t = nav.getTaille();
         int tab[] = new int[t];
         if(nav.getPosition().equals("V")){

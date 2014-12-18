@@ -5,111 +5,101 @@
  */
 package vue;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.RotateTransition;
-import javafx.animation.Timeline;
+import con.JoueurCont;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.FlowPane;
-import javafx.util.Duration;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  *
- * @author ueve
+ * @author badr
  */
-public class InitialisationVue extends FlowPane {
-
-    private  ImageView navires[];
-    private  Label navireslbl[];
-    private RotateTransition rt;
-    private  boolean selected;
-    private  int navCreers;
+public class InitialisationVue extends Stage {
+    
+    
+    
+    private static NavirePaneVue navirePaneVue;
+    private static int navEnCours;
+    private static BorderPane paneau;
+    private static BorderPane affichage;
+    private static StackPane root;
     
     public InitialisationVue() {
-        setPadding(new Insets(5, 0, 5, 0));
-        setVgap(4);
-        setHgap(4);
-        setPrefWrapLength(274); // preferred width allows for two columns
-        setStyle("-fx-background-color: DAE6F3;");
-        setSelected(false);
-        navCreers = 0;
-        navireslbl = new Label[5];
-        navires = new ImageView[5];
-        for (int i = 0; i < 5; i++) {
-            navires[i] = new ImageView(new Image(getClass().getResourceAsStream("/ressources/icons/n" + (i + 1) + ".png")));
-            final int x = i;
-            navireslbl[i] = new Label("",navires[i]);
-            navireslbl[i].setPrefSize(135.00, 135.00);
-            navireslbl[i].setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    //desactiverNav(x);
-                    SeaBattle.setNavEnCours(x);
-                    rotateImage(x);
-                    setSelected(true);
-                }
-            });
-            
- 
-            getChildren().add(navireslbl[i]);
-        }
         
-    }
-
-    public void rotateImage(int i) {
-        if (SeaBattle.getPartie().getJoueur().getNavires().getPosition().equals("H")) {
-            rt = new RotateTransition(Duration.millis(500), navireslbl[i]);
-            rt.setByAngle(-90);
-            rt.setAutoReverse(true);
-            rt.play();
-            SeaBattle.getPartie().getJoueur().getNavires().setPosition("V");
-        } else {
-            rt = new RotateTransition(Duration.millis(500), navireslbl[i]);
-            rt.setByAngle(90);
-            rt.setAutoReverse(true);
-            rt.play();
-            SeaBattle.getPartie().getJoueur().getNavires().setPosition("H");
-        }
-    }
-    
-    public void desactiverNav(int i){
-        for (int j = 0; j < 5; j++) {
-            if(j != i){
-                navireslbl[j].setDisable(true);
-            }
-        }
-    }
-    
-    public  Label getLblEnCours(){
-        return navireslbl[SeaBattle.getNavEnCours()];
-    }
-
-    public  ImageView getNavEnCours(){
-        return navires[SeaBattle.getNavEnCours()];
-    }
-    
-    public  boolean isSelected() {
-        return selected;
-    }
-
-    public  void setSelected(boolean selecte) {
-        selected = selecte;
-        if (!selecte) {
-            navCreers++;
-            if (navCreers == 5) {
-                BattleVue bv = new BattleVue(SeaBattle.getPartie().getJoueur().getGrille().getVue());
-                SeaBattle.getPartie().setJouEnCours();
-                ((Node)(this)).getScene().getWindow().hide();
-            }
-        }
+        paneau = new BorderPane();
+        affichage = new BorderPane();
+        final GrilleVue grilleVue = Accueil.getPartie().getJoueur(0).getGrille().getVue();
         
+        navirePaneVue = new NavirePaneVue();
+        
+        affichage.setTop(navirePaneVue);
+        Button rein = new Button("Reinésialiser");
+        rein.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        actualiser();
+                    }
+                });
+        Button auto = new Button("AUTO");
+        auto.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        actualiser();
+                        JoueurCont.placerAuto();
+                    }
+                });
+        Button go = new Button("To The Battle");
+        go.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        BattleVue bv = new BattleVue(Accueil.getPartie().getJoueur().getGrille().getVue());
+                        Accueil.getPartie().setJouEnCours();
+                        ((Node)(event.getSource())).getScene().getWindow().hide();
+                    }
+                });
+        VBox vbox = new VBox(auto, rein, go);
+        affichage.setBottom(vbox);
+        
+        paneau.setLeft(grilleVue);
+        paneau.setRight(affichage);
+        
+        root = new StackPane();
+        root.getChildren().add(paneau);
+        
+        Scene scene = new Scene(root);
+        
+        setTitle("Sea Battle");
+        setScene(scene);
+        show();
     }
-    
+
+    public static int getNavEnCours() {
+        return navEnCours;
+    }
+
+    public static void setNavEnCours(int navEnCours) {
+        InitialisationVue.navEnCours = navEnCours;
+    }
+
+    public static void actualiser(){
+        navirePaneVue = new NavirePaneVue();
+        affichage.setTop(navirePaneVue);
+        Accueil.getPartie().getJoueur(0).getGrille().setVue(new GrilleVue());
+        paneau.setLeft(Accueil.getPartie().getJoueur(0).getGrille().getVue());
+    }
+
+    public static NavirePaneVue getNavirePaneVue() {
+        return navirePaneVue;
+    }
+
+    public static void setNavirePaneVue(NavirePaneVue navirePaneVue) {
+        InitialisationVue.navirePaneVue = navirePaneVue;
+    }
     
 }

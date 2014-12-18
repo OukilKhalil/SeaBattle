@@ -9,7 +9,7 @@ import java.util.Iterator;
 import mod.CaseGrille;
 import mod.Grille;
 import mod.Navire;
-import vue.SeaBattle;
+import vue.Accueil;
 
 /**
  *
@@ -19,11 +19,11 @@ public class SelectCase {
     
     public static void selectioner(Integer num){
         
-        SeaBattle.getPartie().getJoueur().getNavires().setCoordonneeX(cord(num)[0]);
-        SeaBattle.getPartie().getJoueur().getNavires().setCoordonneeY(cord(num)[1]);
+        Accueil.getPartie().getJoueur().getNavires().setCoordonneeX(cord(num)[0]);
+        Accueil.getPartie().getJoueur().getNavires().setCoordonneeY(cord(num)[1]);
         selectionerCrille(num);
         
-        Navire n = SeaBattle.getPartie().getJoueur().getNavires();
+        Navire n = Accueil.getPartie().getJoueur().getNavires();
         System.out.println(n.getType()+"   "+n.getCoordonneeX()+":"+n.getCoordonneeY()+"   "+n.getPosition());
     }
     
@@ -43,8 +43,8 @@ public class SelectCase {
     }
     
     public static void selectionerCrille(Integer num){
-        Iterator<CaseGrille> it = SeaBattle.getPartie().getJoueur().getNavires().getCases().iterator();
-        Grille grille = SeaBattle.getPartie().getJoueur().getGrille();
+        Iterator<CaseGrille> it = Accueil.getPartie().getJoueur().getNavires().getCases().iterator();
+        Grille grille = Accueil.getPartie().getJoueur().getGrille();
         while (it.hasNext()) {
             CaseGrille cg = it.next();
             grille.getCasGrille(cg.getX(), cg.getY()).setEtat("Plein");

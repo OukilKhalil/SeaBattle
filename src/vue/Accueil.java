@@ -22,6 +22,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import mod.Configuration;
+import mod.Ordinateur;
+import mod.Partie;
 
 /**
  *
@@ -29,8 +31,14 @@ import mod.Configuration;
  */
 public class Accueil extends Application {
     
+    private static Partie partie;
+    
     @Override
     public void start(Stage primaryStage) {
+        
+        partie = new Partie();
+        partie.getOrdinateur().placer();
+        partie.setJouEnCours(0);
        
         String image = getClass().getResource("/ressources/icons/back.jpg").toExternalForm();
         
@@ -68,25 +76,44 @@ public class Accueil extends Application {
         Button demo = new Button("Demo");
         demo.setPrefHeight(80);
         demo.setPrefWidth(300);
+        demo.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        public void handle(MouseEvent me) {
+                            Configuration.setModePartie("Demo");
+                            InitialisationVue iv = new InitialisationVue();
+                            partie.setJoueurs(0, new Ordinateur());
+                            Ordinateur o = (Ordinateur)(partie.getJoueur(0));
+                            o.placer();
+                            BattleVue bv = new BattleVue(o.getGrille().getVue());
+                            iv.hide();
+                            modeVbox.getScene().getWindow().hide();
+                                partie.setJouEnCours();
+                        }
+                    });
         Button unVsCpu = new Button("Joueur Vs CPU");
         unVsCpu.setPrefHeight(80);
         unVsCpu.setPrefWidth(300);
         unVsCpu.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         public void handle(MouseEvent me) {
-                            typeVbox.setVisible(true);
-                            modeVbox.setVisible(false);
+                            InitialisationVue iv = new InitialisationVue();
+                            modeVbox.getScene().getWindow().hide();
                         }
                     });
         Button multi = new Button("MultiJoueur");
         multi.setPrefHeight(80);
         multi.setPrefWidth(300);
-        
+        multi.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        public void handle(MouseEvent me) {
+                            Configuration.setModePartie("MultiJoueur");
+                            InitialisationVue iv = new InitialisationVue();
+                            modeVbox.getScene().getWindow().hide();
+                        }
+                    });
         Button bn = new Button("Bataille Navale");
         bn.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         public void handle(MouseEvent me) {
                             Configuration.setTypePartie("Bataille Navale");
-                            SeaBattle sb = new SeaBattle();
-                            ((Node)(me.getSource())).getScene().getWindow().hide();
+                            typeVbox.setVisible(false);
+                            modeVbox.setVisible(true);
                         }
                     });
         bn.setPrefHeight(50);
@@ -97,7 +124,8 @@ public class Accueil extends Application {
         mr.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         public void handle(MouseEvent me) {
                             Configuration.setTypePartie("Mission Radar");
-                            SeaBattle sb = new SeaBattle();
+                            typeVbox.setVisible(false);
+                            modeVbox.setVisible(true);
                         }
                     });
         Button oa = new Button("Opération Artillerie");
@@ -110,12 +138,11 @@ public class Accueil extends Application {
         typeVbox.getChildren().addAll(bn, mr, oa, ar);
         typeVbox.setAlignment(Pos.CENTER);
         typeVbox.setSpacing(20);
-        typeVbox.setVisible(false);
-        
         
         modeVbox.getChildren().addAll(demo, unVsCpu, multi);
         modeVbox.setAlignment(Pos.CENTER);
         modeVbox.setSpacing(50);
+        modeVbox.setVisible(false);
         
         optionsPane.getChildren().addAll(typeVbox, modeVbox);
         optionsPane.setVisible(false);
@@ -138,4 +165,7 @@ public class Accueil extends Application {
         launch(args);
     }
     
+    public static Partie getPartie() {
+        return partie;
+    }
 }

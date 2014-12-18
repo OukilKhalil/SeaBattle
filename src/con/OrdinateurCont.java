@@ -8,7 +8,7 @@ package con;
 import java.util.Random;
 import mod.CaseGrille;
 import mod.Grille;
-import vue.SeaBattle;
+import vue.Accueil;
 
 /**
  *
@@ -21,7 +21,7 @@ public class OrdinateurCont {
     
     public static void tirer(){
         
-        Grille grille = SeaBattle.getPartie().getJoueur().getGrille();
+        Grille grille = Accueil.getPartie().getJoueur().getGrille();
         if(derniereCase != null){
             String direction[] = {"G", "D", "H" , "B"};
             

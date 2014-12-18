@@ -9,7 +9,7 @@ import java.util.Iterator;
 import mod.CaseGrille;
 import mod.Navire;
 import vue.GrilleVue;
-import vue.SeaBattle;
+import vue.Accueil;
 
 /**
  *
@@ -19,11 +19,11 @@ public class NavireCont {
     
     public static void couler(Navire n){
         Iterator<CaseGrille> cases = n.getCases().iterator();
-        GrilleVue gv = SeaBattle.getPartie().getJoueur().getGrille().getVue();
+        GrilleVue gv = Accueil.getPartie().getJoueur().getGrille().getVue();
         while (cases.hasNext()) {
             CaseGrille cg = cases.next();
             gv.getCaseBtn(Integer.parseInt(String.valueOf(cg.getX())+String.valueOf(cg.getY()))).setDisable(true);
         }
-        SeaBattle.getPartie().getJoueur().setNavireRestants(SeaBattle.getPartie().getJoueur().getNavireRestants()-1);
+        Accueil.getPartie().getJoueur().setNavireRestants(Accueil.getPartie().getJoueur().getNavireRestants()-1);
     }
 }

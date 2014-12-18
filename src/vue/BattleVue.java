@@ -24,7 +24,7 @@ public class BattleVue extends Stage{
     
 
     public BattleVue(GrilleVue gv) {
-        this.grilleVueJ2 = SeaBattle.getPartie().getJoueur(1).getGrille().getVue();
+        this.grilleVueJ2 = Accueil.getPartie().getJoueur(1).getGrille().getVue();
         this.grilleVueJ1 = gv;
         BorderPane tour = new BorderPane();
         
@@ -50,7 +50,7 @@ public class BattleVue extends Stage{
         }
         pan.setCenter(tour);
         
-        Grille grille = SeaBattle.getPartie().getOrdinateur().getGrille();
+        Grille grille = Accueil.getPartie().getOrdinateur().getGrille();
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 if (grille.getCasGrille(j, i).getEtat().equals("Plein")) {

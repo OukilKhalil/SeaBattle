@@ -11,7 +11,8 @@ package mod;
  */
 public class Configuration {
     
-    private static String typePartie;
+    private static String typePartie = "Bataille navale";
+    private static String modePartie = "Joueur Vs CPU";
 
     public static String getTypePartie() {
         return typePartie;
@@ -20,5 +21,14 @@ public class Configuration {
     public static void setTypePartie(String typePartie) {
         Configuration.typePartie = typePartie;
     }
+
+    public static String getModePartie() {
+        return modePartie;
+    }
+
+    public static void setModePartie(String modePartie) {
+        Configuration.modePartie = modePartie;
+    }
+    
     
 }

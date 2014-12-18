@@ -14,7 +14,8 @@ import mod.Grille;
 import mod.Joueur;
 import mod.Navire;
 import vue.CaseBtn;
-import vue.SeaBattle;
+import vue.Accueil;
+import vue.InitialisationVue;
 
 /**
  *
@@ -23,9 +24,9 @@ import vue.SeaBattle;
 public class JoueurCont {
     
     public static void tirer(int x, int y){
-        Joueur joueur = SeaBattle.getPartie().getJoueur();
+        Joueur joueur = Accueil.getPartie().getJoueur();
         
-        CaseBtn cb = SeaBattle.getPartie().getJoueur().getGrille().getVue().getCaseBtn(Integer.parseInt(String.valueOf(x)+String.valueOf(y)));
+        CaseBtn cb = Accueil.getPartie().getJoueur().getGrille().getVue().getCaseBtn(Integer.parseInt(String.valueOf(x)+String.valueOf(y)));
         cb.setPadding(Insets.EMPTY);
         if(joueur.getGrille().getCasGrille(x, y).getEtat().equals("Plein")){
             cb.setExplosion();
@@ -37,15 +38,12 @@ public class JoueurCont {
                     nav.setPartie_touchee(nav.getPartie_touchee()+1);
                 }
             }
-            if (SeaBattle.getPartie().getJouEnCours() == 0) {
-                SeaBattle.getPartie().setJouEnCours();
-                SeaBattle.getPartie().setJouEnCours();
-            }
+            Accueil.getPartie().setJouEnCours();
         }
         else{
             cb.setEmpty();
             cb.setStyle("");
-            SeaBattle.getPartie().setJouEnCours();
+            Accueil.getPartie().setJouEnCours();
         }
         
         joueur.getGrille().getCasGrille(x, y).setEtat("Tirer");
@@ -58,7 +56,7 @@ public class JoueurCont {
     
     public static void placerAuto(){
         
-        Joueur joueur = SeaBattle.getPartie().getJoueur();
+        Joueur joueur = Accueil.getPartie().getJoueur();
                 
         for (int i = 0; i < 5; i++) {
             Random rand = new Random();
@@ -73,11 +71,11 @@ public class JoueurCont {
             joueur.getNavires(i).setCoordonneeX(xy[0]);
             joueur.getNavires(i).setCoordonneeY(xy[1]);
             
-            SeaBattle.setNavEnCours(i);
-            if(SeaBattle.getPartie().getJouEnCours() == 0)
+            InitialisationVue.setNavEnCours(i);
+            if(Accueil.getPartie().getJouEnCours() == 0)
                 joueur.getGrille().getVue().select(Integer.parseInt(String.valueOf(xy[0])+String.valueOf(xy[1])));
             
-            Navire n = SeaBattle.getPartie().getJoueur().getNavires(i);
+            Navire n = Accueil.getPartie().getJoueur().getNavires(i);
             System.out.println(n.getType()+"   "+n.getCoordonneeX()+":"+n.getCoordonneeY()+"   "+n.getPosition());
         }
     }
@@ -95,9 +93,9 @@ public class JoueurCont {
     
     public static int[] cases(int x, int y,int i){
         
-        String pos = SeaBattle.getPartie().getJoueur().getNavires(i).getPosition();
-        int taille = SeaBattle.getPartie().getJoueur().getNavires(i).getTaille();
-        Grille grille = SeaBattle.getPartie().getJoueur().getGrille();
+        String pos = Accueil.getPartie().getJoueur().getNavires(i).getPosition();
+        int taille = Accueil.getPartie().getJoueur().getNavires(i).getTaille();
+        Grille grille = Accueil.getPartie().getJoueur().getGrille();
         int tab[] = new int[taille];
         
         if(pos.equals("V")){
@@ -105,7 +103,7 @@ public class JoueurCont {
                 return new int[0];
             }
             for (int j = y; j < y+taille; j++) {
-                if (SeaBattle.getPartie().getJoueur().getGrille().getCasGrille(x, j).getEtat().equals("Plein")) {
+                if (Accueil.getPartie().getJoueur().getGrille().getCasGrille(x, j).getEtat().equals("Plein")) {
                     return new int[0];
                 }
                 tab[j-y] = j;
@@ -120,7 +118,7 @@ public class JoueurCont {
                 return new int[0];
             }
             for (int j = x; j < x+taille; j++) {
-                if (SeaBattle.getPartie().getJoueur().getGrille().getCasGrille(j, y).getEtat().equals("Plein")) {
+                if (Accueil.getPartie().getJoueur().getGrille().getCasGrille(j, y).getEtat().equals("Plein")) {
                     return new int[0];
                 }
                 tab[j-x] = j;

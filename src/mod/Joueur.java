@@ -5,7 +5,8 @@
  */
 package mod;
 
-import vue.SeaBattle;
+import vue.Accueil;
+import vue.InitialisationVue;
 
 /**
  *
@@ -33,7 +34,7 @@ public class Joueur {
     }
 
     public Navire getNavires() {
-        return navires[SeaBattle.getNavEnCours()];
+        return navires[InitialisationVue.getNavEnCours()];
     }
     
     public Navire getNavires(int i) {
@@ -51,6 +52,7 @@ public class Joueur {
     public void setNavireRestants(int navireRestants) {
         this.navireRestants = navireRestants;
         if(this.navireRestants == 0){
+            Accueil.getPartie().setTerminee(true);
             System.out.println("Gagner !!!");
         }
     }

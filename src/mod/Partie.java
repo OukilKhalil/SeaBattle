@@ -6,8 +6,8 @@
 package mod;
 
 import con.OrdinateurCont;
-import vue.SeaBattle;
-import static vue.SeaBattle.actualiser;
+import vue.Accueil;
+import static vue.InitialisationVue.actualiser;
 
 /**
  *
@@ -17,11 +17,13 @@ public class Partie {
     
     private Joueur joueurs[] = new Joueur[2];
     private int jouEnCours;
+    private boolean terminee;
 
     public Partie() {
         joueurs[0] = new Joueur();
         joueurs[1] = new Ordinateur();
         jouEnCours = 1;
+        terminee = false;
     }
     
     public Joueur getJoueur(int i) {
@@ -31,6 +33,11 @@ public class Partie {
     public Joueur getJoueur() {
         return joueurs[getJouEnCours()];
     }
+
+    public void setJoueurs(int i, Joueur joueurs) {
+        this.joueurs[i] = joueurs;
+    }
+    
     
     public Ordinateur getOrdinateur() {
         return (Ordinateur) joueurs[1];
@@ -47,17 +54,28 @@ public class Partie {
     public void setJouEnCours() {
         if (jouEnCours == 0) {
             jouEnCours = 1;
-            SeaBattle.getPartie().getJoueur(0).getGrille().getVue().getLbl().setDisable(true);
-            SeaBattle.getPartie().getJoueur(1).getGrille().getVue().getLbl().setDisable(false);
+            Accueil.getPartie().getJoueur(0).getGrille().getVue().getLbl().setDisable(true);
+            Accueil.getPartie().getJoueur(1).getGrille().getVue().getLbl().setDisable(false);
+            if(Configuration.getModePartie().equals("Demo"))
+                OrdinateurCont.tirer();
         }
         else{
             jouEnCours = 0;
-            SeaBattle.getPartie().getJoueur(1).getGrille().getVue().getLbl().setDisable(true);
-            SeaBattle.getPartie().getJoueur(0).getGrille().getVue().getLbl().setDisable(false);
-            OrdinateurCont.tirer();
-            long t = System.currentTimeMillis();
+            Accueil.getPartie().getJoueur(1).getGrille().getVue().getLbl().setDisable(true);
+            Accueil.getPartie().getJoueur(0).getGrille().getVue().getLbl().setDisable(false);
+            if(!Configuration.getModePartie().equals("MultiJoueur"))
+                OrdinateurCont.tirer();
+            //long t = System.currentTimeMillis();
             //while(System.currentTimeMillis()<t+1000);
         }
+    }
+
+    public boolean isTerminee() {
+        return terminee;
+    }
+
+    public void setTerminee(boolean terminee) {
+        this.terminee = terminee;
     }
     
     public void jouSuivant(){

@@ -8,7 +8,7 @@ package mod;
 import con.NavireCont;
 import java.util.Iterator;
 import java.util.Vector;
-import vue.SeaBattle;
+import vue.Accueil;
 
 /**
  *
