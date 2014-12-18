@@ -18,6 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.util.Duration;
+import mod.Configuration;
 
 /**
  *
@@ -102,11 +103,18 @@ public class NavirePaneVue extends FlowPane {
         selected = selecte;
         if (!selecte) {
             navCreers++;
-            if (navCreers == 5) {
-                BattleVue bv = new BattleVue(Accueil.getPartie().getJoueur().getGrille().getVue());
-                Accueil.getPartie().setJouEnCours();
-                ((Node)(this)).getScene().getWindow().hide();
-            }
+            /*if (navCreers == 5) {
+                if ((!Configuration.getModePartie().equals("MultiJoueur")) && Accueil.getPartie().getJouEnCours() == 0) {
+                            BattleVue bv = new BattleVue(Accueil.getPartie().getJoueur().getGrille().getVue());
+                            Accueil.getPartie().setJouEnCours();
+                            ((Node)(this)).getScene().getWindow().hide();
+                        }
+                        else{
+                            InitialisationVue iv = new InitialisationVue();
+                            Accueil.getPartie().setJouEnCours();
+                            ((Node)(this)).getScene().getWindow().hide();
+                        }
+            }*/
         }
         
     }

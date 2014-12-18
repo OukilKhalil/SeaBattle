@@ -22,7 +22,7 @@ public class Partie {
     public Partie() {
         joueurs[0] = new Joueur();
         joueurs[1] = new Ordinateur();
-        jouEnCours = 1;
+        jouEnCours = 0;
         terminee = false;
     }
     

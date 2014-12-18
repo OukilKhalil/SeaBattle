@@ -10,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.input.MouseEvent;
 import mod.CaseGrille;
+import mod.Configuration;
 import mod.Grille;
 import mod.Joueur;
 import mod.Navire;
@@ -72,7 +73,8 @@ public class JoueurCont {
             joueur.getNavires(i).setCoordonneeY(xy[1]);
             
             InitialisationVue.setNavEnCours(i);
-            if(Accueil.getPartie().getJouEnCours() == 0)
+            
+            if(Accueil.getPartie().getJouEnCours() == 0 || Configuration.getModePartie().equals("MultiJoueur"))
                 joueur.getGrille().getVue().select(Integer.parseInt(String.valueOf(xy[0])+String.valueOf(xy[1])));
             
             Navire n = Accueil.getPartie().getJoueur().getNavires(i);

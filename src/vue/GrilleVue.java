@@ -5,13 +5,12 @@
  */
 package vue;
 
-import javafx.event.EventHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.geometry.Insets;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import mod.Navire;
 
@@ -59,7 +58,7 @@ public class GrilleVue extends GridPane{
             im.setFitHeight(50.0);
             im.setFitWidth(50.0);
             caseBtn[cases[i]].setGraphic(im);
-            if (Accueil.getPartie().getJoueur(0).getNavires().getPosition().equals("V")) {
+            if (Accueil.getPartie().getJoueur().getNavires().getPosition().equals("V")) {
                 caseBtn[cases[i]].setRotate(90);
             }
             caseBtn[cases[i]].setStyle("");
@@ -102,7 +101,7 @@ public class GrilleVue extends GridPane{
     
     public int[] cases(int x){
         
-        Navire nav = Accueil.getPartie().getJoueur(0).getNavires();
+        Navire nav = Accueil.getPartie().getJoueur().getNavires();
         int t = nav.getTaille();
         int tab[] = new int[t];
         if(nav.getPosition().equals("V")){
@@ -145,6 +144,19 @@ public class GrilleVue extends GridPane{
     
     public CaseBtn getCaseBtn(int i) {
         return caseBtn[i];
-    }  
+    }
+    
+    public void youpi(){
+        for (int i = 0; i < 100; i++) {
+            caseBtn [i].setStyle("-fx-base: #b6e7c9;");
+            if(i>0)
+                   caseBtn [i-1].setStyle("");
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(GrilleVue.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
     
 }

@@ -33,7 +33,7 @@ public class CaseBtn extends Button {
             @Override
             public void handle(ActionEvent event) {
                 if(InitialisationVue.getNavirePaneVue().isSelected()){
-                    Accueil.getPartie().getJoueur(0).getGrille().getVue().select(n);
+                    Accueil.getPartie().getJoueur().getGrille().getVue().select(n);
                     SelectCase.selectioner(n);
                     InitialisationVue.getNavirePaneVue().setSelected(false);
                     /*Timeline timeline = new Timeline();
@@ -58,14 +58,14 @@ public class CaseBtn extends Button {
             @Override
             public void handle(MouseEvent event) {
                 if(InitialisationVue.getNavirePaneVue().isSelected())
-                    Accueil.getPartie().getJoueur(0).getGrille().getVue().focusCases(n);
+                    Accueil.getPartie().getJoueur().getGrille().getVue().focusCases(n);
             }
         });
         this.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 if(InitialisationVue.getNavirePaneVue().isSelected())
-                    Accueil.getPartie().getJoueur(0).getGrille().getVue().UnfocusCases(n);
+                    Accueil.getPartie().getJoueur().getGrille().getVue().UnfocusCases(n);
             }
         });
     }

@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import mod.Configuration;
 import mod.Grille;
 
 /**
@@ -25,7 +26,12 @@ public class BattleVue extends Stage{
 
     public BattleVue(GrilleVue gv) {
         this.grilleVueJ2 = Accueil.getPartie().getJoueur(1).getGrille().getVue();
-        this.grilleVueJ1 = gv;
+        if (!Configuration.getModePartie().equals("MultiJoueur")) {
+            this.grilleVueJ1 = gv;
+        }
+        else{
+            this.grilleVueJ1 = Accueil.getPartie().getJoueur(0).getGrille().getVue();
+        }
         BorderPane tour = new BorderPane();
         
         grilleVueJ2.rotDroit();
@@ -43,21 +49,40 @@ public class BattleVue extends Stage{
                 final int y = j;
                 grilleVueJ2.getCaseBtn(Integer.parseInt(String.valueOf(i)+String.valueOf(j))).setOnMouseClicked(new EventHandler<MouseEvent>() {
                         public void handle(MouseEvent me) {
-                            JoueurCont.tirer(x, y);
+                            if (Accueil.getPartie().getJouEnCours() == 1) {
+                                JoueurCont.tirer(x, y);
+                            }
                         }
                     });
             }
         }
-        pan.setCenter(tour);
         
-        Grille grille = Accueil.getPartie().getOrdinateur().getGrille();
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                if (grille.getCasGrille(j, i).getEtat().equals("Plein")) {
-                    grilleVueJ2.getCaseBtn(Integer.parseInt(String.valueOf(j)+String.valueOf(i))).setStyle("-fx-base: #FFAB00;");
+        pan.setCenter(tour);
+        if (Configuration.getModePartie().equals("MultiJoueur")) {
+            for (int i = 0; i < 10; i++) {
+                for (int j = 0; j < 10; j++) {
+                    final int x = i;
+                    final int y = j;
+                    grilleVueJ1.getCaseBtn(Integer.parseInt(String.valueOf(i)+String.valueOf(j))).setOnMouseClicked(new EventHandler<MouseEvent>() {
+                            public void handle(MouseEvent me) {
+                                if (Accueil.getPartie().getJouEnCours() == 0) {
+                                    JoueurCont.tirer(x, y);
+                                }
+                            }
+                        });
+                }
+        }
+        }
+ 
+        Grille grille = Accueil.getPartie().getJoueur(1).getGrille();
+        if (!Configuration.getModePartie().equals("MultiJoueur")) {
+            for (int i = 0; i < 10; i++) {
+                for (int j = 0; j < 10; j++) {
+                    if (grille.getCasGrille(j, i).getEtat().equals("Plein")) {
+                        grilleVueJ2.getCaseBtn(Integer.parseInt(String.valueOf(j)+String.valueOf(i))).setStyle("-fx-base: #FFAB00;");
+                    }
                 }
             }
-            System.out.println();
         }
         Scene scene = new Scene(pan);
         setTitle("Sea Battle");

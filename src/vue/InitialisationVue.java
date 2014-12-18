@@ -15,6 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import mod.Configuration;
 
 /**
  *
@@ -32,9 +33,15 @@ public class InitialisationVue extends Stage {
     
     public InitialisationVue() {
         
+        if (!Configuration.getModePartie().equals("MultiJoueur")) {
+            Accueil.getPartie().setJouEnCours(1);
+            Accueil.getPartie().getOrdinateur().placer();
+            Accueil.getPartie().setJouEnCours(0);
+        }
+        
         paneau = new BorderPane();
         affichage = new BorderPane();
-        final GrilleVue grilleVue = Accueil.getPartie().getJoueur(0).getGrille().getVue();
+        final GrilleVue grilleVue = Accueil.getPartie().getJoueur().getGrille().getVue();
         
         navirePaneVue = new NavirePaneVue();
         
@@ -43,7 +50,7 @@ public class InitialisationVue extends Stage {
         rein.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        actualiser();
+                        Accueil.getPartie().getJoueur().getGrille().getVue().youpi();
                     }
                 });
         Button auto = new Button("AUTO");
@@ -54,13 +61,21 @@ public class InitialisationVue extends Stage {
                         JoueurCont.placerAuto();
                     }
                 });
-        Button go = new Button("To The Battle");
+        Button go = new Button("SeaBattle");
         go.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        BattleVue bv = new BattleVue(Accueil.getPartie().getJoueur().getGrille().getVue());
-                        Accueil.getPartie().setJouEnCours();
-                        ((Node)(event.getSource())).getScene().getWindow().hide();
+                        if ((!Configuration.getModePartie().equals("MultiJoueur")) || Accueil.getPartie().getJouEnCours() == 1) {
+                            BattleVue bv = new BattleVue(Accueil.getPartie().getJoueur(0).getGrille().getVue());
+                            Accueil.getPartie().setJouEnCours();
+                            ((Node)(event.getSource())).getScene().getWindow().hide();
+                        }
+                        else{
+                            Accueil.getPartie().setJouEnCours();
+                            InitialisationVue iv = new InitialisationVue();
+                            ((Node)(event.getSource())).getScene().getWindow().hide();
+                        }
+                        System.out.println(Accueil.getPartie().getJouEnCours());
                     }
                 });
         VBox vbox = new VBox(auto, rein, go);
@@ -90,8 +105,8 @@ public class InitialisationVue extends Stage {
     public static void actualiser(){
         navirePaneVue = new NavirePaneVue();
         affichage.setTop(navirePaneVue);
-        Accueil.getPartie().getJoueur(0).getGrille().setVue(new GrilleVue());
-        paneau.setLeft(Accueil.getPartie().getJoueur(0).getGrille().getVue());
+        Accueil.getPartie().getJoueur().getGrille().setVue(new GrilleVue());
+        paneau.setLeft(Accueil.getPartie().getJoueur().getGrille().getVue());
     }
 
     public static NavirePaneVue getNavirePaneVue() {
