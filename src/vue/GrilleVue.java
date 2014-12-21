@@ -5,8 +5,7 @@
  */
 package vue;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -147,16 +146,38 @@ public class GrilleVue extends GridPane{
     }
     
     public void youpi(){
-        for (int i = 0; i < 100; i++) {
-            caseBtn [i].setStyle("-fx-base: #b6e7c9;");
-            if(i>0)
-                   caseBtn [i-1].setStyle("");
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(GrilleVue.class.getName()).log(Level.SEVERE, null, ex);
+      
+        new Thread(new Runnable(){
+            public void run(){
+                while (true) {
+                    for(int i = 0; i < 10; i++){
+                  final int c = i;
+                  try {
+                            Thread.sleep(200);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    //Modification de notre composant dans l'EDT
+                    Thread t = new Thread(new Runnable(){
+                      public void run(){
+                        caseBtn[c].setStyle("-fx-base: #b6e7c9;");
+                        if(c>0)
+                            caseBtn[c-1].setStyle("");
+                        if(c==0)
+                            caseBtn[9].setStyle("");
+                      }
+                    });
+                    if(Platform.isFxApplicationThread())
+                      t.start();
+                    else{
+                      System.out.println("Lancement dans l' EDT");
+                      Platform.runLater(t);
+                    }
+                }
             }
-        }
+                }
+              
+        }).start();      
     }
     
 }

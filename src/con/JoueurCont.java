@@ -16,6 +16,7 @@ import mod.Joueur;
 import mod.Navire;
 import vue.CaseBtn;
 import vue.Accueil;
+import vue.BattleVue;
 import vue.InitialisationVue;
 
 /**
@@ -37,6 +38,7 @@ public class JoueurCont {
                 Navire nav  = joueur.getNavires(i);
                 if(nav.getCases().contains(new CaseGrille("Plein", x, y))){
                     nav.setPartie_touchee(nav.getPartie_touchee()+1);
+                    BattleVue.decrementer(Accueil.getPartie().getJouEnCours());
                 }
             }
             Accueil.getPartie().setJouEnCours();

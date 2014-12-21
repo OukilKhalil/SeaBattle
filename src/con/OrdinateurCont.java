@@ -19,7 +19,7 @@ public class OrdinateurCont {
     private static CaseGrille derniereCase = null;
     private static int dirEnCours = 0;
     
-    public static void tirer(){
+    public static synchronized void tirer(){
         
         Grille grille = Accueil.getPartie().getJoueur().getGrille();
         if(derniereCase != null){

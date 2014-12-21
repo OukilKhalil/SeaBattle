@@ -43,6 +43,13 @@ public class TypePaneVue extends VBox{
         Button oa = new Button("Opération Artillerie");
         oa.setPrefHeight(50);
         oa.setPrefWidth(300);
+        oa.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        public void handle(MouseEvent me) {
+                            Configuration.setTypePartie("Opération Artillerie");
+                            setVisible(false);
+                            Accueil.getModeVbox().setVisible(true);
+                        }
+                    });
         Button ar = new Button("Alerte Rouge");
         ar.setPrefHeight(50);
         ar.setPrefWidth(300);

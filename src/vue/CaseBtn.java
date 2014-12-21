@@ -112,7 +112,13 @@ public class CaseBtn extends Button {
         else{
             CaseGrille cs = new CaseGrille("Vide", SelectCase.cord(numero)[0], SelectCase.cord(numero)[1]);
             
-            this.setText(String.valueOf(Accueil.getPartie().getJoueur().getGrille().procheCible(cs)));
+            int nbr = Accueil.getPartie().getJoueur().getGrille().procheCible(cs);
+            
+            ImageView im = new ImageView(new Image(GrilleVue.class.getResourceAsStream("/ressources/icons/"+nbr+".png")));
+            im.setFitHeight(50.0);
+            im.setFitWidth(50.0);
+            this.setGraphic(im);
+            this.setText("");
         }
     }
     

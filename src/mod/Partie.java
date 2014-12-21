@@ -6,6 +6,7 @@
 package mod;
 
 import con.OrdinateurCont;
+import javafx.application.Platform;
 import vue.Accueil;
 import static vue.InitialisationVue.actualiser;
 
@@ -56,17 +57,54 @@ public class Partie {
             jouEnCours = 1;
             Accueil.getPartie().getJoueur(0).getGrille().getVue().getLbl().setDisable(true);
             Accueil.getPartie().getJoueur(1).getGrille().getVue().getLbl().setDisable(false);
-            if(Configuration.getModePartie().equals("Demo"))
-                OrdinateurCont.tirer();
+            if(Configuration.getModePartie().equals("Demo") && !terminee)
+                new Thread(new Runnable(){
+                    public void run(){
+                            try {
+                                    Thread.sleep(1000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            Thread t = new Thread(new Runnable(){
+                                public void run(){
+                                    OrdinateurCont.tirer();
+                                }
+                            });
+                            if(Platform.isFxApplicationThread())
+                                t.start();
+                            else{
+                                Platform.runLater(t);
+                            }
+                    }   
+              
+                }).start();      
         }
         else{
             jouEnCours = 0;
             Accueil.getPartie().getJoueur(1).getGrille().getVue().getLbl().setDisable(true);
             Accueil.getPartie().getJoueur(0).getGrille().getVue().getLbl().setDisable(false);
-            if(!Configuration.getModePartie().equals("MultiJoueur"))
-                OrdinateurCont.tirer();
-            //long t = System.currentTimeMillis();
-            //while(System.currentTimeMillis()<t+1000);
+            if((!Configuration.getModePartie().equals("MultiJoueur")) && !terminee)
+                new Thread(new Runnable(){
+                    public void run(){
+                            try {
+                                    Thread.sleep(1000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            Thread t = new Thread(new Runnable(){
+                                public void run(){
+                                    OrdinateurCont.tirer();
+                                }
+                            });
+                            if(Platform.isFxApplicationThread())
+                                t.start();
+                            else{
+                                System.out.println("Lancement dans l' EDT");
+                                Platform.runLater(t);
+                            }
+                        }
+              
+                }).start(); 
         }
     }
 
