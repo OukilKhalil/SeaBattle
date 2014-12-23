@@ -17,32 +17,18 @@ import vue.Accueil;
  */
 public class SelectCase {
     
-    public static void selectioner(Integer num){
+    public static void selectioner(int x , int y){
         
-        Accueil.getPartie().getJoueur().getNavires().setCoordonneeX(cord(num)[0]);
-        Accueil.getPartie().getJoueur().getNavires().setCoordonneeY(cord(num)[1]);
-        selectionerCrille(num);
+        Accueil.getPartie().getJoueur().getNavires().setCoordonneeX(x);
+        Accueil.getPartie().getJoueur().getNavires().setCoordonneeY(y);
+        selectionerCrille();
         
         Navire n = Accueil.getPartie().getJoueur().getNavires();
         System.out.println(n.getType()+"   "+n.getCoordonneeX()+":"+n.getCoordonneeY()+"   "+n.getPosition());
     }
     
     
-    public static int[] cord(Integer num){
-        int tab[] = new int[2];
-        if (num <10) {
-            tab[0] = 0;
-            tab[1] = num;
-        }
-        else{
-            String val = num.toString();
-            tab[0] = Integer.parseInt(val.substring(0, 1));
-            tab[1] = Integer.parseInt(val.substring(1, 2));
-        }
-        return tab;
-    }
-    
-    public static void selectionerCrille(Integer num){
+    public static void selectionerCrille(){
         Iterator<CaseGrille> it = Accueil.getPartie().getJoueur().getNavires().getCases().iterator();
         Grille grille = Accueil.getPartie().getJoueur().getGrille();
         while (it.hasNext()) {

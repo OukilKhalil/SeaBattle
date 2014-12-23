@@ -34,17 +34,8 @@ public class CaseBtn extends Button {
             public void handle(ActionEvent event) {
                 if(InitialisationVue.getNavirePaneVue().isSelected()){
                     Accueil.getPartie().getJoueur().getGrille().getVue().select(n);
-                    SelectCase.selectioner(n);
+                    SelectCase.selectioner(cord()[0], cord()[1]);
                     InitialisationVue.getNavirePaneVue().setSelected(false);
-                    /*Timeline timeline = new Timeline();
-                    timeline.getKeyFrames().addAll(
-                        new KeyFrame(Duration.ZERO, new KeyValue(NavirePaneVue.getNavEnCours().translateXProperty(), 0)),
-                        new KeyFrame(new Duration(1000), new KeyValue(NavirePaneVue.getNavEnCours().translateXProperty(), -500+getXd())),
-                        new KeyFrame(new Duration(1000), new KeyValue(NavirePaneVue.getNavEnCours().translateXProperty(), -getYd()))
-                    );
-                    timeline.setAutoReverse(true);
-                    System.out.println(getXd());
-                    timeline.play();*/
                 }
             }
         }); 
@@ -110,7 +101,7 @@ public class CaseBtn extends Button {
             this.setText("");
         }
         else{
-            CaseGrille cs = new CaseGrille("Vide", SelectCase.cord(numero)[0], SelectCase.cord(numero)[1]);
+            CaseGrille cs = new CaseGrille("Vide", cord()[0], cord()[1]);
             
             int nbr = Accueil.getPartie().getJoueur().getGrille().procheCible(cs);
             
@@ -136,5 +127,23 @@ public class CaseBtn extends Button {
 
     public static void setYd(double y) {
         yd = y;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+    
+    public int[] cord(){
+        int tab[] = new int[2];
+        if (numero <10) {
+            tab[0] = 0;
+            tab[1] = numero;
+        }
+        else{
+            String val = String.valueOf(numero);
+            tab[0] = Integer.parseInt(val.substring(0, 1));
+            tab[1] = Integer.parseInt(val.substring(1, 2));
+        }
+        return tab;
     }
 }

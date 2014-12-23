@@ -5,13 +5,9 @@
  */
 package vue;
 
-import con.JoueurCont;
-import con.SelectCase;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import mod.Configuration;
@@ -26,6 +22,8 @@ public class BattleVue extends Stage{
     private GrilleVue grilleVueJ1;
     private GrilleVue grilleVueJ2;
     private static ProgressBar pb[];
+    
+    
 
     public BattleVue(GrilleVue gv) {
         
@@ -62,59 +60,30 @@ public class BattleVue extends Stage{
         pan.setLeft(left);
         pan.setRight(right);
         
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                final int x = i;
-                final int y = j;
-                grilleVueJ2.getCaseBtn(Integer.parseInt(String.valueOf(i)+String.valueOf(j))).setOnMouseClicked(new EventHandler<MouseEvent>() {
-                        public void handle(MouseEvent me) {
-                            if (Accueil.getPartie().getJouEnCours() == 1) {
-                                JoueurCont.tirer(x, y);
-                            }
-                        }
-                    });
-            }
-        }
+        grilleVueJ2.setModeNrml();
         
         pan.setCenter(tour);
         
         if (Configuration.getModePartie().equals("MultiJoueur")) {
-            for (int i = 0; i < 10; i++) {
-                for (int j = 0; j < 10; j++) {
-                    final int x = i;
-                    final int y = j;
-                    grilleVueJ1.getCaseBtn(Integer.parseInt(String.valueOf(i)+String.valueOf(j))).setOnMouseClicked(new EventHandler<MouseEvent>() {
-                            public void handle(MouseEvent me) {
-                                if (Accueil.getPartie().getJouEnCours() == 0) {
-                                    JoueurCont.tirer(x, y);
-                                }
-                            }
-                        });
-                }
-            }
+            grilleVueJ1.setModeNrml();
         }
  
         if (Configuration.getTypePartie().equals("Opération Artillerie")) {
-            for (int i = 0; i < 10; i++) {
-                for (int j = 0; j < 10; j++) {
-                    final int x = i;
-                    grilleVueJ2.getCaseBtn(Integer.parseInt(String.valueOf(i)+String.valueOf(j))).setOnMouseEntered(new EventHandler<MouseEvent>() {
-                            public void handle(MouseEvent me) {
-                                for (int k = 0; k < 10; k++) {
-                                    grilleVueJ2.getCaseBtn(Integer.parseInt(String.valueOf(x)+String.valueOf(k))).setStyle("-fx-base: #b6e7c9;");
-                                }
-                            }
-                        });
-                    grilleVueJ2.getCaseBtn(Integer.parseInt(String.valueOf(i)+String.valueOf(j))).setOnMouseExited(new EventHandler<MouseEvent>() {
-                            public void handle(MouseEvent me) {
-                                for (int k = 0; k < 10; k++) {
-                                    grilleVueJ2.getCaseBtn(Integer.parseInt(String.valueOf(x)+String.valueOf(k))).setStyle("");
-                                }
-                            }
-                        });
-                }
+            grilleVueJ2.setTypeArt();
+            if (Configuration.getModePartie().equals("MultiJoueur")) {
+                grilleVueJ1.setTypeArt();
             }
         }
+        else if (Configuration.getTypePartie().equals("Alerte Rouge")) {
+            grilleVueJ2.setTypeAR();
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    grilleVueJ2.getCaseBtn(99).requestFocus();
+                }
+            });
+        }
+        
         
         Grille grille = Accueil.getPartie().getJoueur(1).getGrille();
         if (!Configuration.getModePartie().equals("MultiJoueur")) {
@@ -126,6 +95,7 @@ public class BattleVue extends Stage{
                 }
             }
         }
+        
         Scene scene = new Scene(pan);
         setTitle("Sea Battle");
         setScene(scene);
@@ -135,5 +105,4 @@ public class BattleVue extends Stage{
     public static void decrementer(int i){
         pb[i].setProgress(pb[i].getProgress()-0.059);
     }
-    
 }

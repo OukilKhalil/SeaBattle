@@ -53,6 +53,13 @@ public class TypePaneVue extends VBox{
         Button ar = new Button("Alerte Rouge");
         ar.setPrefHeight(50);
         ar.setPrefWidth(300);
+        ar.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        public void handle(MouseEvent me) {
+                            Configuration.setTypePartie("Alerte Rouge");
+                            setVisible(false);
+                            Accueil.getModeVbox().setVisible(true);
+                        }
+                    });
         
         getChildren().addAll(bn, mr, oa, ar);
         setAlignment(Pos.CENTER);

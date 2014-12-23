@@ -50,7 +50,7 @@ public class InitialisationVue extends Stage {
         rein.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        Accueil.getPartie().getJoueur().getGrille().getVue().youpi();
+                        actualiser();
                     }
                 });
         Button auto = new Button("AUTO");

@@ -7,6 +7,8 @@ package mod;
 
 import con.OrdinateurCont;
 import javafx.application.Platform;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.paint.Color;
 import vue.Accueil;
 import static vue.InitialisationVue.actualiser;
 
@@ -53,8 +55,16 @@ public class Partie {
     }
 
     public void setJouEnCours() {
+        final String cssDefault = "-fx-border-color: red;\n"
+                + "-fx-border-width: 3;\n"
+                + "-fx-border-radius:10;\n"
+                + "-fx-border-style: dotted;\n"
+                + "-fx-moz-border-radius:10px;\n"
+                + "-fx-webkit-border-radius:10px;\n";
         if (jouEnCours == 0) {
             jouEnCours = 1;
+            Accueil.getPartie().getJoueur(1).getGrille().getVue().setStyle(cssDefault);
+            Accueil.getPartie().getJoueur(0).getGrille().getVue().setStyle(null);
             Accueil.getPartie().getJoueur(0).getGrille().getVue().getLbl().setDisable(true);
             Accueil.getPartie().getJoueur(1).getGrille().getVue().getLbl().setDisable(false);
             if(Configuration.getModePartie().equals("Demo") && !terminee)
@@ -81,6 +91,8 @@ public class Partie {
         }
         else{
             jouEnCours = 0;
+            Accueil.getPartie().getJoueur(0).getGrille().getVue().setStyle(cssDefault);
+            Accueil.getPartie().getJoueur(1).getGrille().getVue().setStyle(null);
             Accueil.getPartie().getJoueur(1).getGrille().getVue().getLbl().setDisable(true);
             Accueil.getPartie().getJoueur(0).getGrille().getVue().getLbl().setDisable(false);
             if((!Configuration.getModePartie().equals("MultiJoueur")) && !terminee)
@@ -99,13 +111,12 @@ public class Partie {
                             if(Platform.isFxApplicationThread())
                                 t.start();
                             else{
-                                System.out.println("Lancement dans l' EDT");
                                 Platform.runLater(t);
                             }
                         }
               
                 }).start(); 
-        }
+            }
     }
 
     public boolean isTerminee() {
