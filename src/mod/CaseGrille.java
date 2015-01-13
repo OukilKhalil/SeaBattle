@@ -7,7 +7,7 @@ package mod;
 
 /**
  *
- * @author badr
+ * @author ueve
  */
 public class CaseGrille {
     
